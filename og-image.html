@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<!--
+  OG IMAGE ŞABLONU
+  ─────────────────
+  Bu dosyayı tarayıcıda aç, pencere boyutunu 1200x630'a ayarla
+  ve ekran görüntüsü al. Çıkan görüntüyü "og-image.jpg" olarak kaydet.
+  
+  Veya: https://htmlcsstoimage.com adresine bu kodu yapıştır,
+  boyutu 1200x630 olarak ayarla, direkt PNG indir.
+-->
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #0b0d13;
+    font-family: Georgia, 'Times New Roman', serif;
+    display: flex; align-items: stretch;
+  }
+  .left {
+    flex: 1; padding: 64px 60px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .right {
+    width: 340px; padding: 64px 50px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #c9a96e; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: #c9a96e; }
+  .title {
+    font-size: 72px; font-weight: 900; line-height: 0.93;
+    letter-spacing: -0.03em; color: #f2ece0;
+  }
+  .title em { font-style: italic; color: #c9a96e; }
+  .rule { width: 60px; height: 2px; background: #c9a96e; margin: 36px 0; }
+  .sub { font-size: 20px; color: #8a8070; line-height: 1.6; max-width: 480px; }
+  .domain {
+    font-family: 'Courier New', monospace;
+    font-size: 13px; letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.15); text-transform: uppercase;
+  }
+  .stat { margin-bottom: 28px; }
+  .stat-num {
+    font-size: 48px; font-weight: 900;
+    color: #f2ece0; line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .stat-label {
+    font-family: 'Courier New', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.2); margin-top: 6px;
+  }
+  /* Grain overlay */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+  }
+  /* Accent glow */
+  body::before {
+    content: ''; position: fixed; top: -20%; right: -10%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div>
+      <div class="eyebrow">ahmethaktaneker.com</div>
+      <div class="title"><em>Önce</em><br>Türkiye.</div>
+      <div class="rule"></div>
+      <div class="sub">Siyaset, anayasa ve demokrasi üzerine bağımsız analizler.</div>
+    </div>
+    <div class="domain">ahmethaktaneker.com</div>
+  </div>
+  <div class="right">
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Analiz Yazısı</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Kategori</div>
+    </div>
+  </div>
+</body>
+</html>
