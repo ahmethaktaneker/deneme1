@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  YENİ YAZI ŞABLONU                                           ║
+║  ─────────────────────────────────────────────────────────── ║
+║  1. Bu dosyayı kopyala: cp _makale.html yazi-basligim.html  ║
+║  2. Aşağıdaki 6 değişkeni doldur (DÜZENLE etiketlerini bul) ║
+║  3. Makale içeriğini <div class="article-body"> içine yaz   ║
+║  4. sitemap.xml'e yeni URL'i ekle                           ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ▼ DÜZENLE: Yazı başlığı -->
+  <title>Yazı Başlığı | Ahmet Haktan Eker</title>
+  <meta name="description" content="Yazının kısa özeti — 150-160 karakter." />
+  <!-- ▲ DÜZENLE -->
+
+  <meta name="author" content="Ahmet Haktan Eker" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0d13" />
+
+  <!-- Favicon + PWA -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖</text></svg>" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- ▼ DÜZENLE: URL ve OG bilgileri -->
+  <link rel="canonical" href="https://ahmethaktaneker.com/yazilar/yazi-slug/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Ahmet Haktan Eker" />
+  <meta property="og:title" content="Yazı Başlığı" />
+  <meta property="og:description" content="Yazının kısa özeti." />
+  <meta property="og:url" content="https://ahmethaktaneker.com/yazilar/yazi-slug/" />
+  <meta property="og:image" content="https://ahmethaktaneker.com/og-image.jpg" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="article:author" content="Ahmet Haktan Eker" />
+  <meta property="article:published_time" content="2025-01-15" />
+  <meta property="article:section" content="Anayasa" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@ahmethaktaneker" />
+  <meta name="twitter:title" content="Yazı Başlığı" />
+  <meta name="twitter:description" content="Yazının kısa özeti." />
+  <meta name="twitter:image" content="https://ahmethaktaneker.com/og-image.jpg" />
+  <!-- ▲ DÜZENLE -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Yazı Başlığı",
+    "description": "Yazının kısa özeti.",
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "author": {
+      "@type": "Person",
+      "name": "Ahmet Haktan Eker",
+      "url": "https://ahmethaktaneker.com"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Ahmet Haktan Eker",
+      "url": "https://ahmethaktaneker.com"
+    },
+    "url": "https://ahmethaktaneker.com/yazilar/yazi-slug/",
+    "inLanguage": "tr",
+    "articleSection": "Anayasa",
+    "keywords": ["anayasa", "demokrasi", "Türkiye"],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://ahmethaktaneker.com/yazilar/yazi-slug/"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{--bg:#0b0d13;--bg2:#12151e;--bg3:#191d28;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#e8e2d6;--text-muted:#8a8070;--text-faint:#45403b;--accent:#c9a96e;--accent-dim:rgba(201,169,110,0.12);--red:#bf4040;--headline:#f2ece0;--card-bg:#12151e;--card-hover:#181c27;--nav-bg:rgba(11,13,19,0.94);--tag-bg:rgba(201,169,110,0.1);--tag-text:#c9a96e}
+    [data-theme="light"]{--bg:#f6f2ea;--bg2:#ede8dc;--bg3:#e4ddd1;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);--text:#2a2420;--text-muted:#6b5e50;--text-faint:#b0a090;--accent:#9a6f30;--accent-dim:rgba(154,111,48,0.1);--red:#bf4040;--headline:#1a1410;--card-bg:#fff;--card-hover:#f5f0e8;--nav-bg:rgba(246,242,234,0.95);--tag-bg:rgba(154,111,48,0.1);--tag-text:#9a6f30}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',Georgia,serif;font-size:1.1rem;line-height:1.7;transition:background .35s,color .35s;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;border:none;background:none;font:inherit}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+    ::selection{background:var(--accent);color:var(--bg)}
+
+    /* READ PROGRESS */
+    #read-progress{position:fixed;top:0;left:0;z-index:999;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),#e8c98a);transition:width .1s linear;pointer-events:none}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;transition:background .35s}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;letter-spacing:.03em;color:var(--headline)}
+    .nav-logo span{color:var(--accent)}
+    .nav-back{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);transition:color .2s}
+    .nav-back:hover{color:var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:.6rem}
+    .nav-icon-btn{width:34px;height:34px;border-radius:6px;background:transparent;border:1px solid transparent;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s}
+    .nav-icon-btn:hover{background:var(--bg3);border-color:var(--border);color:var(--accent)}
+
+    /* SHARE TOOLTIP */
+    #quote-tooltip{position:fixed;z-index:500;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:.5rem .75rem;display:none;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.4);pointer-events:all}
+    #quote-tooltip.visible{display:flex}
+    .qt-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)}
+    .qt-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid var(--border);color:var(--text-muted);background:transparent}
+    .qt-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* ARTICLE LAYOUT */
+    .article-wrap{max-width:740px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,2rem) 6rem}
+    .article-tag{display:inline-block;padding:.22rem .65rem;background:var(--tag-bg);color:var(--tag-text);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;margin-bottom:1.5rem}
+    .article-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--headline);line-height:1.1;margin-bottom:1.5rem}
+    .article-meta{display:flex;align-items:center;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--text-faint);margin-bottom:.75rem;flex-wrap:wrap}
+    .article-meta-dot{width:2px;height:2px;background:var(--text-faint);border-radius:50%}
+
+    /* Share buttons */
+    .article-share{display:flex;align-items:center;gap:.5rem;padding:1.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:3rem}
+    .share-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-faint);margin-right:.25rem}
+    .share-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .8rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:all .18s}
+    .share-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .share-btn.copied{border-color:var(--accent);color:var(--accent)}
+
+    /* Article body */
+    .article-body{font-size:1.18rem;line-height:1.88;color:var(--text)}
+    .article-body p{margin-bottom:1.5rem}
+    .article-body h2{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--headline);margin:3rem 0 1rem;line-height:1.2}
+    .article-body h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--headline);margin:2rem 0 .75rem}
+    .article-body blockquote{border-left:2px solid var(--accent);padding:.75rem 0 .75rem 1.75rem;margin:2.5rem 0;font-style:italic;color:var(--text-muted);font-size:1.2rem;line-height:1.65}
+    .article-body strong{color:var(--headline)}
+    .article-body a{color:var(--accent);border-bottom:1px solid var(--accent-dim);transition:border-color .2s}
+    .article-body a:hover{border-bottom-color:var(--accent)}
+    .article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1.5rem}
+    .article-body li{margin-bottom:.5rem}
+
+    /* RELATED */
+    .related{border-top:1px solid var(--border);padding-top:3rem;margin-top:3rem}
+    .related-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.75rem;display:flex;align-items:center;gap:.6rem}
+    .related-label::before{content:'';display:block;width:20px;height:1px;background:var(--accent)}
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+    .related-card{background:var(--card-bg);padding:1.5rem;cursor:pointer;transition:background .2s;display:block}
+    .related-card:hover{background:var(--card-hover)}
+    .related-card:hover .related-title{color:var(--accent)}
+    .related-cat{display:inline-block;padding:.18rem .5rem;background:var(--tag-bg);color:var(--tag-text);font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;margin-bottom:.75rem}
+    .related-title{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;color:var(--headline);line-height:1.3;margin-bottom:.5rem;transition:color .2s}
+    .related-meta{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:var(--text-faint)}
+
+    /* FOOTER */
+    .article-footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .af-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--headline)}
+    .af-brand span{color:var(--accent)}
+    .af-links{display:flex;gap:1.5rem}
+    .af-links a{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);transition:color .2s}
+    .af-links a:hover{color:var(--accent)}
+    .af-copy{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-faint)}
+
+    @media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div id="read-progress"></div>
+
+  <div id="quote-tooltip">
+    <span class="qt-label">Seç &amp; Paylaş</span>
+    <button class="qt-btn" id="tweetBtn" onclick="tweetSelection()">𝕏 Tweet</button>
+    <button class="qt-btn" id="copyBtn" onclick="copySelection()">Kopyala</button>
+  </div>
+
+  <nav class="nav">
+    <a href="../../" class="nav-back">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Ana Sayfa
+    </a>
+    <a href="../../" class="nav-logo">AHE<span>.</span></a>
+    <div class="nav-right">
+      <button class="nav-icon-btn" onclick="toggleTheme()" aria-label="Tema değiştir"><span id="theme-icon">☀</span></button>
+    </div>
+  </nav>
+
+  <main>
+    <article class="article-wrap" itemscope itemtype="https://schema.org/BlogPosting">
+
+      <!-- ▼ DÜZENLE: Kategori etiketi -->
+      <span class="article-tag" itemprop="articleSection">Anayasa</span>
+
+      <!-- ▼ DÜZENLE: Başlık -->
+      <h1 class="article-title" itemprop="headline">
+        Yazı Başlığınız Buraya Gelecek
+      </h1>
+
+      <!-- ▼ DÜZENLE: Tarih ve okuma süresi -->
+      <div class="article-meta">
+        <span itemprop="author">Ahmet Haktan Eker</span>
+        <span class="article-meta-dot"></span>
+        <time datetime="2025-01-15" itemprop="datePublished">15 Ocak 2025</time>
+        <span class="article-meta-dot"></span>
+        <span>8 dk okuma</span>
+      </div>
+
+      <div class="article-share">
+        <span class="share-label">Paylaş</span>
+        <a class="share-btn" id="twitterShareBtn" href="#" target="_blank" rel="noopener noreferrer">
+          𝕏 Twitter
+        </a>
+        <button class="share-btn" onclick="copyPageLink(this)">
+          🔗 Linki Kopyala
+        </button>
+      </div>
+
+      <!-- ▼ DÜZENLE: Makale içeriği -->
+      <div class="article-body" itemprop="articleBody">
+        <p>Giriş paragrafı buraya gelecek. Okuyucuyu konuya çekecek güçlü bir açılış cümlesiyle başla.</p>
+
+        <h2>Birinci Bölüm Başlığı</h2>
+        <p>Bu bölümün içeriği buraya gelecek. Her paragraf bir düşünceyi açıklamalı.</p>
+
+        <blockquote>
+          "Güçlü bir alıntı ya da önemli bir vurgu cümlesi buraya gelecek."
+        </blockquote>
+
+        <h2>İkinci Bölüm Başlığı</h2>
+        <p>Devam eden analiz buraya.</p>
+
+        <h2>Sonuç</h2>
+        <p>Yazıyı özetleyen ve düşündüren bir kapanış paragrafı.</p>
+      </div>
+      <!-- ▲ DÜZENLE -->
+
+      <div class="related">
+        <div class="related-label">İlgili Yazılar</div>
+        <div class="related-grid" id="relatedGrid"></div>
+      </div>
+
+    </article>
+  </main>
+
+  <footer class="article-footer">
+    <div class="af-brand">Ahmet Haktan <span>Eker</span></div>
+    <nav class="af-links">
+      <a href="../../">Ana Sayfa</a>
+      <a href="../">Tüm Yazılar</a>
+      <a href="../../#hakkimda">Hakkımda</a>
+      <a href="../../#iletisim">İletişim</a>
+    </nav>
+    <div class="af-copy">© 2025 Ahmet Haktan Eker</div>
+  </footer>
+
+  <script>
+    // ▼ DÜZENLE
+    const THIS_CATEGORY = 'anayasa';
+    const THIS_SLUG = 'yazi-slug';
+    const THIS_TITLE = 'Yazı Başlığınız Buraya Gelecek';
+    // ▲ DÜZENLE
+
+    const allPosts = [
+      {slug:"anayasa-mahkemesi-mesruiyet",title:"Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi",category:"anayasa",categoryLabel:"Anayasa",date:"15 Ocak 2025",readTime:"8 dk"},
+      {slug:"genclik-siyasetten-kopus",title:"Gençliğin Siyasetten Kopuşu: Bir Kriz mi, Fırsat mı?",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"28 Aralık 2024",readTime:"6 dk"},
+      {slug:"ifade-ozgurlugu-sinir",title:"İfade Özgürlüğü: Sınır Nerede Çizilmeli?",category:"anayasa",categoryLabel:"Anayasa",date:"10 Aralık 2024",readTime:"9 dk"},
+      {slug:"populizmin-anatomisi",title:"Populizmin Anatomisi: Siyaset Bilimi Perspektifinden",category:"dunya",categoryLabel:"Dünya Siyaseti",date:"2 Aralık 2024",readTime:"10 dk"},
+      {slug:"secim-sistemi-reformu",title:"Seçim Sistemi Reformu: Temsil mi, İstikrar mı?",category:"turk-siyaseti",categoryLabel:"Türk Siyaseti",date:"18 Kasım 2024",readTime:"12 dk"},
+      {slug:"sivil-toplum-guclendirilmesi",title:"Sivil Toplumun Güçlendirilmesi: Orta Sınıfın Rolü",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"5 Kasım 2024",readTime:"7 dk"}
+    ];
+
+    function buildRelated() {
+      const same = allPosts.filter(p => p.category === THIS_CATEGORY && p.slug !== THIS_SLUG);
+      const other = allPosts.filter(p => p.category !== THIS_CATEGORY && p.slug !== THIS_SLUG);
+      const picks = [...same, ...other].slice(0, 3);
+      const grid = document.getElementById('relatedGrid');
+      if (!picks.length) { grid.parentElement.style.display = 'none'; return; }
+      grid.innerHTML = picks.map(p => `
+        <a class="related-card" href="../${p.slug}/">
+          <span class="related-cat">${p.categoryLabel}</span>
+          <div class="related-title">${p.title}</div>
+          <div class="related-meta">${p.date} · ${p.readTime}</div>
+        </a>`).join('');
+    }
+
+    window.addEventListener('scroll', () => {
+      const el = document.documentElement;
+      const pct = (window.scrollY / (el.scrollHeight - el.clientHeight)) * 100;
+      document.getElementById('read-progress').style.width = Math.min(pct, 100) + '%';
+    }, { passive: true });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tweetText = encodeURIComponent(`"${THIS_TITLE}" — @ahmethaktaneker`);
+      const tweetUrl = encodeURIComponent(window.location.href);
+      document.getElementById('twitterShareBtn').href =
+        `https://x.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
+    });
+
+    function copyPageLink(btn) {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Kopyalandı';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    let selectedText = '';
+    document.addEventListener('mouseup', () => {
+      const sel = window.getSelection();
+      const text = sel ? sel.toString().trim() : '';
+      const tooltip = document.getElementById('quote-tooltip');
+      if (text.length > 20 && text.length < 280) {
+        selectedText = text;
+        const range = sel.getRangeAt(0).getBoundingClientRect();
+        tooltip.style.top = (window.scrollY + range.top - 56) + 'px';
+        tooltip.style.left = Math.min(range.left, window.innerWidth - 240) + 'px';
+        tooltip.classList.add('visible');
+      } else {
+        tooltip.classList.remove('visible');
+      }
+    });
+    document.addEventListener('mousedown', e => {
+      if (!document.getElementById('quote-tooltip').contains(e.target)) {
+        document.getElementById('quote-tooltip').classList.remove('visible');
+      }
+    });
+
+    function tweetSelection() {
+      const text = encodeURIComponent(`"${selectedText}" — @ahmethaktaneker`);
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+      document.getElementById('quote-tooltip').classList.remove('visible');
+    }
+    function copySelection() {
+      navigator.clipboard.writeText(`"${selectedText}" — ahmethaktaneker.com`).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '✓ Kopyalandı';
+        setTimeout(() => { btn.textContent = 'Kopyala'; }, 1800);
+      });
+    }
+
+    function toggleTheme() {
+      const d = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+      document.getElementById('theme-icon').textContent = d ? '☾' : '☀';
+      localStorage.setItem('theme', d ? 'light' : 'dark');
+    }
+    function loadTheme() {
+      const s = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', s);
+      document.getElementById('theme-icon').textContent = s === 'dark' ? '☀' : '☾';
+    }
+
+    loadTheme();
+    buildRelated();
+  </script>
+
+  <!-- Geliştirmeler paketi — yazi sayfaları için ../../js/ yolu -->
+  <script src="../../js/enhancements.js"></script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () =>
+        navigator.serviceWorker.register('/sw.js').catch(() => {})
+      );
+    }
+  </script>
+</body>
+</html>
