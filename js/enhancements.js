@@ -1164,11 +1164,18 @@ function initPageTransitions() {
     const link = e.target.closest('a[href]');
     if (!link) return;
     const href = link.getAttribute('href');
-    /* Sadece gerçek navigasyon linklerini yakala - onclick olan linklere dokunma */
-    if (!href || href.startsWith('#') || href.startsWith('http') ||
-        href.startsWith('mailto') || href.startsWith('javascript') ||
-        link.target === '_blank' || link.hasAttribute('onclick') ||
-        e.target.hasAttribute('onclick')) return;
+    /* Sadece sayfa navigasyonu yapan linklere animasyon uygula */
+    /* Tüm interaktif linkleri atla: #hash, http, mailto, javascript, onclick, _blank */
+    if (!href ||
+        href.startsWith('#') ||
+        href.startsWith('http') ||
+        href.startsWith('mailto') ||
+        href.startsWith('javascript') ||
+        href === '' ||
+        link.target === '_blank' ||
+        link.hasAttribute('onclick') ||
+        e.target.closest('[onclick]') ||
+        e.defaultPrevented) return;
 
     e.preventDefault();
     document.body.classList.add('ahe-exit');

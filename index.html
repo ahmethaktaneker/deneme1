@@ -435,7 +435,7 @@
 
     function renderGrid(list){const nf=list.filter(p=>!p.featured);document.getElementById('postsGrid').innerHTML=!nf.length?'<div style="padding:2rem;color:var(--text-muted);font-family:\'JetBrains Mono\',monospace;font-size:.75rem">Bu kategoride daha fazla yazı yok.</div>':nf.map(p=>`<a class="post-card" href="yazilar/${p.slug}/"><div class="post-card-body"><span class="post-tag">${p.categoryLabel}</span><h3 class="post-title-sm" style="margin-bottom:.7rem;font-size:1.08rem">${p.title}</h3><p class="post-excerpt">${p.excerpt}</p></div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem"><div class="post-meta"><span>${p.date}</span><span class="post-meta-dot"></span><span>${p.readTime}</span></div><span class="post-arrow">→</span></div></a>`).join('')}
 
-    function filterPosts(cat,btn){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const f=cat==='tumu'?posts:posts.filter(p=>p.category===cat);renderFeatured(f);renderGrid(f)}
+    function filterPosts(cat,btn){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');const f=cat==='tumu'?posts:posts.filter(p=>p.category===cat);renderFeatured(f);renderGrid(f);setTimeout(()=>{if(typeof upgradeFeaturedCards==='function'){upgradeFeaturedCards();upgradePostCards();}},50);}
 
     function toggleSearch(){const o=document.getElementById('searchOverlay');o.classList.toggle('open');if(o.classList.contains('open')){document.getElementById('searchInput').focus();document.body.style.overflow='hidden'}else{document.body.style.overflow='';document.getElementById('searchResults').innerHTML='';document.getElementById('searchInput').value=''}}
     function closeSearchOutside(e){if(e.target===document.getElementById('searchOverlay'))toggleSearch()}
@@ -451,7 +451,21 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('searchOverlay').classList.contains('open'))toggleSearch()}if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();toggleSearch()}});
     window.addEventListener('scroll',()=>{const y=window.scrollY;document.getElementById('navbar').classList.toggle('scrolled',y>40);const doc=document.documentElement;document.getElementById('page-progress').style.width=Math.min((y/(doc.scrollHeight-doc.clientHeight))*100,100)+'%';document.getElementById('back-top').classList.toggle('visible',y>600)},{passive:true});
     function initReveal(){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -32px 0px'});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))}
-    document.addEventListener('DOMContentLoaded',()=>{loadTheme();buildTicker();filterPosts('tumu');initReveal()});
+    document.addEventListener('DOMContentLoaded',()=>{
+      loadTheme();
+      buildTicker();
+      filterPosts('tumu');
+      initReveal();
+      /* enhancements.js thumbnail upgrade - retry ile garantile */
+      function tryUpgrade(attempt){
+        if(typeof upgradeFeaturedCards==='function'&&typeof upgradePostCards==='function'){
+          upgradeFeaturedCards();upgradePostCards();
+        } else if(attempt<10){
+          setTimeout(()=>tryUpgrade(attempt+1),100);
+        }
+      }
+      setTimeout(()=>tryUpgrade(0),50);
+    });
   </script>
 
   <!-- Geliştirmeler paketi -->
