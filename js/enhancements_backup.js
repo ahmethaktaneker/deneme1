@@ -83,27 +83,10 @@ const AHE = {
    YARDIMCI — Sayfa tespiti
    ════════════════════════════════════════════════════════════════════ */
 const PAGE = {
-  isHome: () => {
-    const p = window.location.pathname;
-    return p === '/' || p === '/index.html' || (!p.includes('/yazilar/') && (p.endsWith('/') || p.endsWith('index.html')));
-  },
-  isArchive: () => {
-    const p = window.location.pathname;
-    if (!p.includes('/yazilar/')) return false;
-    const after = p.split('/yazilar/')[1] || '';
-    return after === '' || after === 'index.html';
-  },
-  isPost: () => {
-    const p = window.location.pathname;
-    if (!p.includes('/yazilar/')) return false;
-    const after = p.split('/yazilar/')[1] || '';
-    return after !== '' && after !== 'index.html';
-  },
-  currentSlug: () => {
-    const parts = window.location.pathname.split('/').filter(Boolean);
-    const last = parts[parts.length - 1];
-    return (last && last !== 'index.html') ? last : parts[parts.length - 2] || '';
-  },
+  isHome:    () => window.location.pathname === '/' || window.location.pathname.endsWith('index.html') && !window.location.pathname.includes('/yazilar/'),
+  isArchive: () => window.location.pathname.includes('/yazilar/') && window.location.pathname.split('/').filter(Boolean).length === 1,
+  isPost:    () => window.location.pathname.includes('/yazilar/') && window.location.pathname.split('/').filter(Boolean).length >= 2,
+  currentSlug: () => window.location.pathname.split('/').filter(Boolean).pop(),
 };
 
 
@@ -1141,38 +1124,30 @@ function initPageTransitions() {
   const style = document.createElement('style');
   style.textContent = `
     @keyframes ahe-fade-in {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    body.ahe-ready {
-      animation: ahe-fade-in 0.3s ease both;
+    body {
+      animation: ahe-fade-in 0.35s ease forwards;
     }
     .ahe-exit {
       opacity: 0 !important;
-      transform: translateY(-4px) !important;
-      transition: opacity 0.18s ease, transform 0.18s ease !important;
+      transform: translateY(-6px) !important;
+      transition: opacity 0.22s ease, transform 0.22s ease !important;
     }
   `;
   document.head.appendChild(style);
-
-  /* Sadece tam sayfa yüklendikten sonra animasyonu tetikle */
-  requestAnimationFrame(() => {
-    document.body.classList.add('ahe-ready');
-  });
 
   document.addEventListener('click', e => {
     const link = e.target.closest('a[href]');
     if (!link) return;
     const href = link.getAttribute('href');
-    /* Sadece gerçek navigasyon linklerini yakala - onclick olan linklere dokunma */
     if (!href || href.startsWith('#') || href.startsWith('http') ||
-        href.startsWith('mailto') || href.startsWith('javascript') ||
-        link.target === '_blank' || link.hasAttribute('onclick') ||
-        e.target.hasAttribute('onclick')) return;
+        href.startsWith('mailto') || link.target === '_blank') return;
 
     e.preventDefault();
     document.body.classList.add('ahe-exit');
-    setTimeout(() => { window.location.href = href; }, 200);
+    setTimeout(() => { window.location.href = href; }, 220);
   });
 }
 
