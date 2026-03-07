@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tüm Yazılar | Ahmet Haktan Eker</title>
+  <meta name="description" content="Ahmet Haktan Eker'in siyaset, anayasa ve demokrasi üzerine yazdığı tüm analiz ve denemeler." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ahmethaktaneker.com/yazilar/" />
+  <meta property="og:title" content="Tüm Yazılar | Ahmet Haktan Eker" />
+  <meta property="og:description" content="Siyaset, anayasa ve demokrasi üzerine tüm analizler." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ahmethaktaneker.com/yazilar/" />
+  <meta property="og:image" content="https://ahmethaktaneker.com/og-image.jpg" />
+  <meta name="theme-color" content="#0b0d13" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#0b0d13;--bg2:#12151e;--bg3:#191d28;--border:rgba(255,255,255,0.07);--text:#e8e2d6;--text-muted:#8a8070;--text-faint:#45403b;--accent:#c9a96e;--accent-dim:rgba(201,169,110,0.12);--red:#bf4040;--headline:#f2ece0;--card-bg:#12151e;--card-hover:#181c27;--nav-bg:rgba(11,13,19,0.94);--tag-bg:rgba(201,169,110,0.1);--tag-text:#c9a96e}
+    [data-theme="light"]{--bg:#f6f2ea;--bg2:#ede8dc;--bg3:#e4ddd1;--border:rgba(0,0,0,0.08);--text:#2a2420;--text-muted:#6b5e50;--text-faint:#b0a090;--accent:#9a6f30;--accent-dim:rgba(154,111,48,0.1);--red:#bf4040;--headline:#1a1410;--card-bg:#fff;--card-hover:#f5f0e8;--nav-bg:rgba(246,242,234,0.95);--tag-bg:rgba(154,111,48,0.1);--tag-text:#9a6f30}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',Georgia,serif;font-size:1.1rem;line-height:1.7;transition:background .35s,color .35s;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;border:none;background:none;font:inherit}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+    ::selection{background:var(--accent);color:var(--bg)}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;transition:background .35s}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;letter-spacing:.03em;color:var(--headline)}
+    .nav-logo span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:.6rem}
+    .nav-icon-btn{width:34px;height:34px;border-radius:6px;background:transparent;border:1px solid transparent;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s}
+    .nav-icon-btn:hover{background:var(--bg3);border-color:var(--border);color:var(--accent)}
+    .hamburger{display:none;flex-direction:column;gap:4px;width:34px;height:34px;align-items:center;justify-content:center;border-radius:6px}
+    .hamburger span{display:block;width:18px;height:1.5px;background:var(--text-muted);transition:all .3s;border-radius:2px}
+    .mobile-menu{position:fixed;top:64px;left:0;right:0;z-index:99;background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem 2rem 1.5rem;transform:translateY(-110%);transition:transform .3s}
+    .mobile-menu.open{transform:translateY(0)}
+    .mobile-menu ul{list-style:none}
+    .mobile-menu ul li{padding:.65rem 0;border-bottom:1px solid var(--border)}
+    .mobile-menu ul li:last-child{border-bottom:none}
+    .mobile-menu ul a{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+
+    /* HERO */
+    .page-hero{padding:clamp(6rem,12vw,8rem) clamp(1.5rem,5vw,4rem) clamp(3rem,5vw,4rem);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(201,169,110,.05) 0%,transparent 70%);pointer-events:none}
+    .page-hero-inner{max-width:1400px;margin:0 auto;position:relative}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:1.5rem}
+    .breadcrumb a{color:var(--text-faint);transition:color .2s}
+    .breadcrumb a:hover{color:var(--accent)}
+    .breadcrumb-sep{opacity:.4}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:var(--headline);line-height:.95;letter-spacing:-.02em;margin-bottom:1.25rem}
+    .page-title em{font-style:italic;color:var(--accent)}
+    .page-sub{font-size:1.1rem;color:var(--text-muted);max-width:440px;line-height:1.7}
+    .page-stats{display:flex;align-items:center;gap:2rem;margin-top:2rem}
+    .page-stat{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)}
+    .page-stat strong{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--headline);letter-spacing:0;margin-bottom:.2rem}
+
+    /* SEARCH BAR */
+    .search-bar-wrap{background:var(--bg2);border-bottom:1px solid var(--border);padding:.85rem clamp(1.5rem,5vw,4rem);position:sticky;top:64px;z-index:90}
+    .search-bar-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .search-bar-input{flex:1;min-width:200px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:.55rem 1rem;font-family:'Crimson Pro',serif;font-size:1rem;color:var(--text);outline:none;transition:border-color .2s}
+    .search-bar-input:focus{border-color:var(--accent)}
+    .search-bar-input::placeholder{color:var(--text-faint)}
+    .cats-inline{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+    .cat-btn{padding:.3rem .8rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);background:transparent;transition:all .18s}
+    .cat-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .cat-btn.active{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+
+    /* POSTS LIST */
+    .posts-wrap{max-width:1400px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+    .year-group{padding:3rem 0 0}
+    .year-label{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2vw,1.5rem);font-weight:900;color:var(--border);letter-spacing:-.02em;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+    .post-row{display:grid;grid-template-columns:80px 1fr auto;align-items:start;gap:1.5rem 2rem;padding:1.4rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;margin:0 -1rem;padding-left:1rem;padding-right:1rem;border-radius:3px}
+    .post-row:hover{background:var(--bg2)}
+    .post-row:hover .pr-title{color:var(--accent)}
+    .pr-date{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-faint);padding-top:.3rem}
+    .pr-main{}
+    .pr-tag{display:inline-block;padding:.15rem .5rem;background:var(--tag-bg);color:var(--tag-text);font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;margin-bottom:.5rem}
+    .pr-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--headline);line-height:1.25;margin-bottom:.4rem;transition:color .2s}
+    .pr-excerpt{font-size:.95rem;color:var(--text-muted);line-height:1.55}
+    .pr-read{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);white-space:nowrap;display:flex;align-items:center;gap:.4rem;padding-top:.3rem}
+    .pr-read-arrow{color:var(--accent);transition:transform .2s}
+    .post-row:hover .pr-read-arrow{transform:translateX(4px)}
+
+    .no-results{padding:4rem 0;text-align:center;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.1em}
+
+    /* FOOTER */
+    .page-footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:4rem}
+    .pf-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--headline)}
+    .pf-brand span{color:var(--accent)}
+    .pf-links{display:flex;gap:1.5rem}
+    .pf-links a{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);transition:color .2s}
+    .pf-links a:hover{color:var(--accent)}
+    .pf-copy{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:var(--text-faint)}
+
+    @media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}}
+    @media(max-width:600px){.post-row{grid-template-columns:1fr;gap:.5rem}.pr-date{display:none}.pr-read{display:none}}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../" class="nav-logo">AHE<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="../">Ana Sayfa</a></li>
+      <li><a href="./" class="active">Yazılar</a></li>
+      <li><a href="../#manifesto">Manifesto</a></li>
+      <li><a href="../#hakkimda">Hakkımda</a></li>
+      <li><a href="../#iletisim">İletişim</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-icon-btn" onclick="toggleTheme()"><span id="theme-icon">☀</span></button>
+      <button class="hamburger nav-icon-btn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="../" onclick="closeMenu()">Ana Sayfa</a></li>
+      <li><a href="./">Yazılar</a></li>
+      <li><a href="../#manifesto" onclick="closeMenu()">Manifesto</a></li>
+      <li><a href="../#hakkimda" onclick="closeMenu()">Hakkımda</a></li>
+      <li><a href="../#iletisim" onclick="closeMenu()">İletişim</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Konum">
+        <a href="../">Ana Sayfa</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Yazılar</span>
+      </nav>
+      <h1 class="page-title">Tüm <em>Yazılar</em></h1>
+      <p class="page-sub">Siyaset, anayasa ve demokrasi üzerine bağımsız analizler ve denemeler.</p>
+      <div class="page-stats">
+        <div class="page-stat"><strong id="totalCount">6</strong>Yazı</div>
+        <div class="page-stat"><strong>4</strong>Kategori</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH + FILTER BAR -->
+  <div class="search-bar-wrap">
+    <div class="search-bar-inner">
+      <input type="search" class="search-bar-input" id="archiveSearch"
+        placeholder="Yazı ara..." oninput="filterArchive()" autocomplete="off" />
+      <div class="cats-inline" id="archiveCats">
+        <button class="cat-btn active" data-cat="tumu" onclick="setCat('tumu',this)">Tümü</button>
+        <button class="cat-btn" data-cat="anayasa" onclick="setCat('anayasa',this)">Anayasa</button>
+        <button class="cat-btn" data-cat="turk-siyaseti" onclick="setCat('turk-siyaseti',this)">Türk Siyaseti</button>
+        <button class="cat-btn" data-cat="dunya" onclick="setCat('dunya',this)">Dünya Siyaseti</button>
+        <button class="cat-btn" data-cat="genclik" onclick="setCat('genclik',this)">Gençlik</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTS LIST -->
+  <main class="posts-wrap" id="postsWrap"></main>
+
+  <footer class="page-footer">
+    <div class="pf-brand">Ahmet Haktan <span>Eker</span></div>
+    <nav class="pf-links">
+      <a href="../">Ana Sayfa</a>
+      <a href="../#hakkimda">Hakkımda</a>
+      <a href="../#iletisim">İletişim</a>
+      <a href="../sitemap.xml">Site Haritası</a>
+    </nav>
+    <div class="pf-copy">© 2025 Ahmet Haktan Eker</div>
+  </footer>
+
+  <script>
+    // Yeni yazı ekledikçe buraya da ekle
+    const posts = [
+      {slug:"anayasa-mahkemesi-mesruiyet",title:"Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi",excerpt:"Yargısal denetim, demokratik sistemin bel kemiğidir. Peki Türkiye'de bu denetim mekanizması ne ölçüde işlevseldir?",category:"anayasa",categoryLabel:"Anayasa",date:"15 Ocak 2025",year:2025,readTime:"8 dk"},
+      {slug:"genclik-siyasetten-kopus",title:"Gençliğin Siyasetten Kopuşu: Bir Kriz mi, Fırsat mı?",excerpt:"Türkiye'de gençlerin siyasi katılım oranlarındaki düşüş endişe verici. Bu tablonun ardında ne var?",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"28 Aralık 2024",year:2024,readTime:"6 dk"},
+      {slug:"ifade-ozgurlugu-sinir",title:"İfade Özgürlüğü: Sınır Nerede Çizilmeli?",excerpt:"Demokratik toplumlarda ifade özgürlüğünün sınırları tartışmalıdır. Liberal ve cumhuriyetçi perspektiften bir değerlendirme.",category:"anayasa",categoryLabel:"Anayasa",date:"10 Aralık 2024",year:2024,readTime:"9 dk"},
+      {slug:"populizmin-anatomisi",title:"Populizmin Anatomisi: Siyaset Bilimi Perspektifinden",excerpt:"Populizm nedir, nasıl işler ve neden bu kadar etkili? Küresel bir olguyu kavramsal olarak inceliyoruz.",category:"dunya",categoryLabel:"Dünya Siyaseti",date:"2 Aralık 2024",year:2024,readTime:"10 dk"},
+      {slug:"secim-sistemi-reformu",title:"Seçim Sistemi Reformu: Temsil mi, İstikrar mı?",excerpt:"Türkiye'nin seçim sistemi tartışması yeniden gündemde. D'Hondt, barajlar ve temsil kalitesi üzerine teknik bir analiz.",category:"turk-siyaseti",categoryLabel:"Türk Siyaseti",date:"18 Kasım 2024",year:2024,readTime:"12 dk"},
+      {slug:"sivil-toplum-guclendirilmesi",title:"Sivil Toplumun Güçlendirilmesi: Orta Sınıfın Rolü",excerpt:"Demokratik sağlamlaşmanın temel koşullarından biri güçlü bir sivil toplumdur. Türkiye'de bu yapı nasıl inşa edilebilir?",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"5 Kasım 2024",year:2024,readTime:"7 dk"}
+    ];
+
+    let activeCat = 'tumu';
+
+    function filterArchive() {
+      const q = document.getElementById('archiveSearch').value.toLowerCase();
+      const filtered = posts.filter(p => {
+        const matchQ = !q || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) || p.categoryLabel.toLowerCase().includes(q);
+        const matchC = activeCat === 'tumu' || p.category === activeCat;
+        return matchQ && matchC;
+      });
+      renderList(filtered);
+    }
+
+    function setCat(cat, btn) {
+      activeCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterArchive();
+    }
+
+    function renderList(list) {
+      const wrap = document.getElementById('postsWrap');
+      document.getElementById('totalCount').textContent = list.length;
+      if (!list.length) { wrap.innerHTML = '<div class="no-results">Sonuç bulunamadı.</div>'; return; }
+      const byYear = {};
+      list.forEach(p => { if (!byYear[p.year]) byYear[p.year] = []; byYear[p.year].push(p); });
+      const years = Object.keys(byYear).sort((a, b) => b - a);
+      wrap.innerHTML = years.map(y => `
+        <div class="year-group">
+          <div class="year-label">${y}</div>
+          ${byYear[y].map(p => `
+            <a class="post-row" href="${p.slug}/" title="${p.title}">
+              <div class="pr-date">${p.date.split(' ').slice(0,2).join(' ')}</div>
+              <div class="pr-main">
+                <span class="pr-tag">${p.categoryLabel}</span>
+                <div class="pr-title">${p.title}</div>
+                <div class="pr-excerpt">${p.excerpt}</div>
+              </div>
+              <div class="pr-read">
+                ${p.readTime}
+                <span class="pr-read-arrow">→</span>
+              </div>
+            </a>`).join('')}
+        </div>`).join('');
+    }
+
+    // URL parametresinden kategori oku (?cat=anayasa)
+    function initFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat');
+      if (cat) {
+        const btn = document.querySelector(`.cat-btn[data-cat="${cat}"]`);
+        if (btn) { activeCat = cat; document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+      }
+    }
+
+    function toggleTheme() {
+      const d = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+      document.getElementById('theme-icon').textContent = d ? '☾' : '☀';
+      localStorage.setItem('theme', d ? 'light' : 'dark');
+    }
+    function loadTheme() {
+      const s = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', s);
+      document.getElementById('theme-icon').textContent = s === 'dark' ? '☀' : '☾';
+    }
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    loadTheme();
+    initFromURL();
+    filterArchive();
+  </script>
+</body>
+</html>
