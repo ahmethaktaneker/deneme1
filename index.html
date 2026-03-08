@@ -308,8 +308,8 @@
       </div>
     </div>
     <aside class="hero-stats">
-      <div><div class="hero-stat-num">12</div><div class="hero-stat-label">Analiz Yazısı</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">Kategori</div></div>
+      <div><div class="hero-stat-num">1</div><div class="hero-stat-label">Analiz Yazısı</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">1</div><div class="hero-stat-label">Kategori</div></div>
     </aside>
   </header>
 
@@ -321,13 +321,7 @@
         <div><div class="section-kicker">Son Yazılar</div><h2 class="section-title">Öne Çıkanlar</h2></div>
         <a href="yazilar/" class="view-all">Tüm yazılar →</a>
       </div>
-      <div class="cats reveal rd1">
-        <button class="cat-btn active" onclick="filterPosts('tumu',this)">Tümü</button>
-        <button class="cat-btn" onclick="filterPosts('anayasa',this)">Anayasa</button>
-        <button class="cat-btn" onclick="filterPosts('turk-siyaseti',this)">Türk Siyaseti</button>
-        <button class="cat-btn" onclick="filterPosts('dunya',this)">Dünya Siyaseti</button>
-        <button class="cat-btn" onclick="filterPosts('genclik',this)">Gençlik & Sivil Toplum</button>
-      </div>
+
       <div class="featured-grid reveal" id="featuredGrid"></div>
       <div style="margin-top:1px"><div class="posts-grid reveal rd1" id="postsGrid"></div></div>
     </div>
@@ -436,12 +430,7 @@
   <script>
     /* ── POSTS DATA ── */
     const posts=[
-      {id:1,slug:"anayasa-mahkemesi-mesruiyet",title:"Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi",excerpt:"Yargısal denetim, demokratik sistemin bel kemiğidir. Peki Türkiye'de bu denetim mekanizması ne ölçüde işlevseldir?",category:"anayasa",categoryLabel:"Anayasa",date:"15 Ocak 2025",readTime:"8 dk",featured:true},
-      {id:2,slug:"genclik-siyasetten-kopus",title:"Gençliğin Siyasetten Kopuşu: Bir Kriz mi, Fırsat mı?",excerpt:"Türkiye'de gençlerin siyasi katılım oranlarındaki düşüş endişe verici. Bu tablonun ardında ne var?",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"28 Aralık 2024",readTime:"6 dk",featured:true},
-      {id:3,slug:"ifade-ozgurlugu-sinir",title:"İfade Özgürlüğü: Sınır Nerede Çizilmeli?",excerpt:"Demokratik toplumlarda ifade özgürlüğünün sınırları tartışmalıdır. Liberal ve cumhuriyetçi perspektiften bir değerlendirme.",category:"anayasa",categoryLabel:"Anayasa",date:"10 Aralık 2024",readTime:"9 dk"},
-      {id:4,slug:"populizmin-anatomisi",title:"Populizmin Anatomisi: Siyaset Bilimi Perspektifinden",excerpt:"Populizm nedir, nasıl işler ve neden bu kadar etkili? Küresel bir olguyu kavramsal olarak inceliyoruz.",category:"dunya",categoryLabel:"Dünya Siyaseti",date:"2 Aralık 2024",readTime:"10 dk"},
-      {id:5,slug:"secim-sistemi-reformu",title:"Seçim Sistemi Reformu: Temsil mi, İstikrar mı?",excerpt:"Türkiye'nin seçim sistemi tartışması yeniden gündemde. D'Hondt, barajlar ve temsil kalitesi üzerine teknik bir analiz.",category:"turk-siyaseti",categoryLabel:"Türk Siyaseti",date:"18 Kasım 2024",readTime:"12 dk"},
-      {id:6,slug:"sivil-toplum-guclendirilmesi",title:"Sivil Toplumun Güçlendirilmesi: Orta Sınıfın Rolü",excerpt:"Demokratik sağlamlaşmanın temel koşullarından biri güçlü bir sivil toplumdur. Türkiye'de bu yapı nasıl inşa edilebilir?",category:"genclik",categoryLabel:"Gençlik & Sivil Toplum",date:"5 Kasım 2024",readTime:"7 dk"}
+      {id:1,slug:"anayasa-mahkemesi-mesruiyet",title:"Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi",excerpt:"Yargısal denetim, demokratik sistemin bel kemiğidir. Peki Türkiye'de bu denetim mekanizması ne ölçüde işlevseldir? Anayasa Mahkemesi'nin tarihsel rolünü ve güncel krizini mercek altına alıyoruz.",category:"anayasa",categoryLabel:"Anayasa",date:"15 Ocak 2025",readTime:"8 dk",featured:true}
     ];
 
     /* ── RENDER ── */
