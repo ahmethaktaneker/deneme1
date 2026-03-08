@@ -1,72 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-
-  <!-- Ana Sayfa -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ahmethaktaneker.com/</loc>
-    <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Yazılar Arşivi -->
   <url>
     <loc>https://ahmethaktaneker.com/yazilar/</loc>
-    <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Bireysel Yazılar — yeni yazı ekledikçe buraya da ekle -->
   <url>
     <loc>https://ahmethaktaneker.com/yazilar/anayasa-mahkemesi-mesruiyet/</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>Ahmet Haktan Eker</news:name>
-        <news:language>tr</news:language>
-      </news:publication>
-      <news:publication_date>2025-01-15</news:publication_date>
-      <news:title>Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi</news:title>
-    </news:news>
   </url>
-
-  <url>
-    <loc>https://ahmethaktaneker.com/yazilar/genclik-siyasetten-kopus/</loc>
-    <lastmod>2024-12-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://ahmethaktaneker.com/yazilar/ifade-ozgurlugu-sinir/</loc>
-    <lastmod>2024-12-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://ahmethaktaneker.com/yazilar/populizmin-anatomisi/</loc>
-    <lastmod>2024-12-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://ahmethaktaneker.com/yazilar/secim-sistemi-reformu/</loc>
-    <lastmod>2024-11-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://ahmethaktaneker.com/yazilar/sivil-toplum-guclendirilmesi/</loc>
-    <lastmod>2024-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
 </urlset>

@@ -183,12 +183,14 @@
     .newsletter-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
     .newsletter-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;color:var(--headline);line-height:1.2;margin-bottom:.6rem}
     .newsletter-sub{color:var(--text-muted);font-size:1rem}
-    .newsletter-form{display:flex}
-    .newsletter-form input{flex:1;background:var(--bg3);border:1px solid var(--border);border-right:none;border-radius:3px 0 0 3px;padding:.8rem 1.2rem;font-family:'Crimson Pro',serif;font-size:1rem;color:var(--text);outline:none;transition:border-color .2s}
-    .newsletter-form input:focus{border-color:var(--accent)}
-    .newsletter-form input::placeholder{color:var(--text-faint)}
-    .newsletter-form button{padding:.8rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:0 3px 3px 0;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;transition:background .2s;white-space:nowrap}
-    .newsletter-form button:hover{background:#d4b87a}
+    .newsletter-form-wrap{display:flex}
+    .newsletter-form-wrap input{flex:1;background:var(--bg3);border:1px solid var(--border);border-right:none;border-radius:3px 0 0 3px;padding:.8rem 1.2rem;font-family:'Crimson Pro',serif;font-size:1rem;color:var(--text);outline:none;transition:border-color .2s}
+    .newsletter-form-wrap input:focus{border-color:var(--accent)}
+    .newsletter-form-wrap input::placeholder{color:var(--text-faint)}
+    .newsletter-form-wrap button{padding:.8rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:0 3px 3px 0;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;transition:background .2s,opacity .2s;white-space:nowrap;min-width:110px}
+    .newsletter-form-wrap button:hover{background:#d4b87a}
+    .newsletter-form-wrap button:disabled{opacity:.6;cursor:not-allowed}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
     .newsletter-note{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-faint);margin-top:.7rem}
 
     /* FOOTER */
@@ -235,7 +237,7 @@
 
     @media(max-width:1000px){.nav-links{display:none}.hamburger{display:flex}.hero-stats{display:none}.about-grid{grid-template-columns:1fr;gap:2.5rem}.about-portrait-wrap{position:static}.about-portrait{max-height:320px}.about-accent-card{display:none}}
     @media(max-width:700px){.featured-grid{grid-template-columns:1fr}.newsletter-grid{grid-template-columns:1fr;gap:2rem}.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
-    @media(max-width:500px){.posts-grid{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr}.newsletter-form{flex-direction:column}.newsletter-form input{border-right:1px solid var(--border);border-radius:3px;margin-bottom:.5rem}.newsletter-form button{border-radius:3px}.hero-actions{flex-direction:column;align-items:flex-start}#back-top{bottom:1.25rem;right:1.25rem}#bm-toggle{display:none}#ahe-bookmarks{display:none!important}}
+    @media(max-width:500px){.posts-grid{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr}.newsletter-form-wrap{flex-direction:column}.newsletter-form-wrap input{border-right:1px solid var(--border);border-radius:3px;margin-bottom:.5rem}.newsletter-form-wrap button{border-radius:3px;width:100%}.hero-actions{flex-direction:column;align-items:flex-start}#back-top{bottom:1.25rem;right:1.25rem}#bm-toggle{display:none}#ahe-bookmarks{display:none!important}}
   </style>
 </head>
 <body>
@@ -373,13 +375,12 @@
           <p class="newsletter-sub">Haftada bir, doğrudan gelen kutunuza.</p>
         </div>
         <div class="reveal rd1">
-          <form action="https://ahmethaktaneker.us1.list-manage.com/subscribe/post?u=XXXX&amp;id=XXXX"
-                method="post" target="_blank" onsubmit="handleSubscribe(event)"
-                class="newsletter-form" novalidate>
-            <input type="email" name="EMAIL" id="emailInput" placeholder="E-posta adresiniz" autocomplete="email" required />
-            <div style="position:absolute;left:-5000px" aria-hidden="true"><input type="text" name="b_XXXX_XXXX" tabindex="-1" value="" /></div>
-            <button type="submit">Abone Ol →</button>
-          </form>
+          <div class="newsletter-form-wrap">
+            <label for="emailInput" class="sr-only">E-posta adresiniz</label>
+            <input type="email" id="emailInput" placeholder="E-posta adresiniz" autocomplete="email" required
+              onkeydown="if(event.key==='Enter')handleSubscribe()" />
+            <button onclick="handleSubscribe()" id="subBtn">Abone Ol →</button>
+          </div>
           <div class="newsletter-note" id="subMsg" role="status" aria-live="polite">Spam yok. İstediğinizde abonelikten çıkabilirsiniz.</div>
         </div>
       </div>
@@ -496,11 +497,41 @@
     function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
     function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
     function goTo(id){const el=document.getElementById(id);if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}
-    function handleSubscribe(e){
+    async function handleSubscribe(){
       const email=document.getElementById('emailInput').value.trim();
       const msg=document.getElementById('subMsg');
-      if(!email||!email.includes('@')){e.preventDefault();msg.textContent='⚠ Geçerli bir e-posta adresi girin.';msg.style.color='var(--red)';}
-      else{msg.textContent='✓ Teşekkürler! Onay e-postası gönderildi.';msg.style.color='var(--accent)';}
+      const btn=document.getElementById('subBtn');
+      if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        msg.textContent='⚠ Geçerli bir e-posta adresi girin.';
+        msg.style.color='var(--red)';return;
+      }
+      btn.disabled=true;btn.textContent='Ekleniyor...';
+      msg.textContent='';msg.style.color='';
+      try{
+        const res=await fetch('https://api.sender.net/v2/subscribers',{
+          method:'POST',
+          headers:{
+            'Authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGZkMWU4MzA5YjhkNmQzYTRhOTViMTFkZDBlZWY2ZWY0NTM3NTE2OThlNDhkMzNkNjM5MTNjYzU5ZTk3NDgyMzY3NDhkMDM2YTgwZDZiNGQiLCJpYXQiOjE3NzI5NzQ1MDAuODE3MzU5LCJuYmYiOjE3NzI5NzQ1MDAuODE3MzYxLCJleHAiOjQ5MjY1NzQ1MDAuODE1Mjg0LCJzdWIiOiIxMDU4MDY5Iiwic2NvcGVzIjpbXX0.fjCEaLf9gFg-_S24F7ULabOy_Dq4bGl-K--eQVLVH95af6NUaxcU0jUX0c-V20XuzShgdO0ORmHS79bFT8CYV63bwlCPJV37NsKB67lwYwch0Keu7UWHkVrFTb4ICjY75B7UV9s_lWg_bEPkpECcQiniaZWsHY1v9sx9DoVa47fHcTzDHc_0_2O6OB3cHpOHtZ8QRH9RXKkhuhf_yA8qEs-audd3Mw8X3Is2sJr15mrWmtqw8EbYXXThBCKUrV-qerwjtvHqCHY2gcNNkH_E5zIxxsL-0m8qb_p5n7DPIvu73Inlbg8rUysRa8st2YsBM80PJaKSzCLtatspNnewdSNSY0jzwpl7OwEArHW0AA975QY3yYZykkonClUrm9Rqu7I2BvDop_-XrroU4yehiB_mCO9XA6AKp9oozGjoGuszN7maIRUWCknTx0hlbJbCXv-wUavPyriyrnij4sOUdUBY7MyjArOk7I9QeepxHIPfgxtHHUu3AUjzCWBfaWa1u3smiqM9ga8KNgb2KEK1Ojm0FT7LK4a648hxGBeIAwEdqPdlsCUx55NuQz24DxAVN8DRqJykdAf893wU8xvkcDPXcqlQ1AblKdlnzmm_8DBwVLaZTD6fmLedGxI5lzEwNc4EMpZwnaK5kawKy4TbAqyHYUF3A7JEnbw1EfXIRTU',
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({email:email,groups:['dPKvX1']})
+        });
+        const data=await res.json().catch(()=>({}));
+        if(res.ok||res.status===422){
+          /* 422 = zaten abone, yine de başarı say */
+          msg.textContent='✓ Teşekkürler! Hoş geldiniz.';
+          msg.style.color='var(--accent)';
+          document.getElementById('emailInput').value='';
+          btn.textContent='✓ Abone Olundu';
+          localStorage.setItem('ahe_subscribed','1');
+        } else {
+          throw new Error(data.message||'Bir hata oluştu.');
+        }
+      }catch(err){
+        msg.textContent='⚠ '+(err.message||'Bağlantı hatası. Lütfen tekrar deneyin.');
+        msg.style.color='var(--red)';
+        btn.disabled=false;btn.textContent='Abone Ol →';
+      }
     }
 
     /* ── BOOKMARKS ── */
@@ -545,9 +576,14 @@
           if(p.x<0||p.x>canvas.width)p.vx*=-1;
           if(p.y<0||p.y>canvas.height)p.vy*=-1;
         });
-        requestAnimationFrame(draw);
+        animId=requestAnimationFrame(draw);
       }
-      draw();
+      let animId=requestAnimationFrame(draw);
+      /* Tab gizlenince CPU koru */
+      document.addEventListener('visibilitychange',()=>{
+        if(document.hidden)cancelAnimationFrame(animId);
+        else animId=requestAnimationFrame(draw);
+      });
     }
 
     /* ── REVEAL ── */
@@ -556,6 +592,21 @@
         entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
       },{threshold:.08,rootMargin:'0px 0px -32px 0px'});
       document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    }
+
+    /* ── SMOOTH PAGE TRANSITIONS ── */
+    function initPageTransitions(){
+      document.querySelectorAll('a[href]').forEach(a=>{
+        if(a.hostname!==location.hostname||a.hash||a.target)return;
+        a.addEventListener('click',e=>{
+          const href=a.getAttribute('href');
+          if(!href||href.startsWith('#'))return;
+          e.preventDefault();
+          document.body.style.opacity='0';
+          document.body.style.transition='opacity .18s ease';
+          setTimeout(()=>{location.href=href;},180);
+        });
+      });
     }
 
     /* ── EVENTS ── */
@@ -577,6 +628,20 @@
     filterPosts('tumu');
     initReveal();
     initParticles();
+    initPageTransitions();
+
+    /* Zaten abone olan kullaniciya butonu baska goster */
+    if(localStorage.getItem('ahe_subscribed')){
+      const btn=document.getElementById('subBtn');
+      if(btn)btn.textContent='✓ Abonesiniz';
+    }
+
+    /* Sayfa yukleme fade-in */
+    document.body.style.opacity='0';
+    requestAnimationFrame(()=>{
+      document.body.style.transition='opacity .3s ease';
+      document.body.style.opacity='1';
+    });
 
     /* PWA */
     if('serviceWorker' in navigator){

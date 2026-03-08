@@ -317,7 +317,22 @@
     window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40);const doc=document.documentElement;document.getElementById('page-progress').style.width=Math.min((window.scrollY/(doc.scrollHeight-doc.clientHeight))*100,100)+'%';},{passive:true});
     const urlCat=new URLSearchParams(window.location.search).get('cat');
     if(urlCat){const b=document.querySelector(`.cat-btn[data-cat="${urlCat}"]`);if(b){activeCat=urlCat;document.querySelectorAll('.cat-btn[data-cat]').forEach(x=>x.classList.remove('active'));b.classList.add('active');}}
+    /* Smooth gecis */
+    document.querySelectorAll('a[href]').forEach(a=>{
+      if(a.hostname!==location.hostname||a.hash||a.target)return;
+      a.addEventListener('click',e=>{
+        const href=a.getAttribute('href');
+        if(!href||href.startsWith('#'))return;
+        e.preventDefault();
+        document.body.style.opacity='0';
+        document.body.style.transition='opacity .18s ease';
+        setTimeout(()=>{location.href=href;},180);
+      });
+    });
     loadTheme();buildTicker();filterArchive();initParticles();
+    /* Sayfa fade-in */
+    document.body.style.opacity='0';
+    requestAnimationFrame(()=>{document.body.style.transition='opacity .28s ease';document.body.style.opacity='1';});
     if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
   </script>
 </body>
