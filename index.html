@@ -104,7 +104,10 @@
 
     /* TICKER */
     .ticker-wrap{background:var(--accent);padding:.45rem 0;overflow:hidden;width:100%;position:relative}
-    .ticker{display:flex;white-space:nowrap;animation:ticker 35s linear infinite;will-change:transform}
+    .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+    .ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--accent),transparent)}
+    .ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--accent),transparent)}
+    .ticker{display:flex;white-space:nowrap;animation:ticker 35s linear infinite;will-change:transform;min-width:100%}
     .ticker-item{display:inline-flex;align-items:center;gap:1.25rem;padding:0 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);font-weight:500}
     .ticker-sep{opacity:.4}
 
@@ -224,6 +227,10 @@
     .bm-list a{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--text-muted);transition:color .2s;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .bm-list a:hover{color:var(--accent)}
     .bm-empty{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-faint);text-align:center;padding:.5rem 0}
+    .bm-btn{position:absolute;top:.75rem;right:.75rem;width:28px;height:28px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-faint);transition:all .18s;opacity:0;z-index:2}
+    .post-card:hover .bm-btn,.featured-main:hover .bm-btn,.featured-side-item:hover .bm-btn{opacity:1}
+    .bm-btn:hover,.bm-btn.saved{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+    .bm-btn.saved{opacity:1}
     #bm-toggle{position:fixed;bottom:2rem;left:2rem;z-index:49;width:40px;height:40px;border-radius:4px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s;font-size:.9rem}
     #bm-toggle:hover{border-color:var(--accent);color:var(--accent)}
 
@@ -310,8 +317,8 @@
       </div>
     </div>
     <aside class="hero-stats">
-      <div><div class="hero-stat-num">1</div><div class="hero-stat-label">Analiz Yazısı</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">1</div><div class="hero-stat-label">Kategori</div></div>
+      <div><div class="hero-stat-num" id="statCount">—</div><div class="hero-stat-label">Analiz Yazısı</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="statCats">—</div><div class="hero-stat-label">Kategori</div></div>
     </aside>
   </header>
 
@@ -358,9 +365,11 @@
         <p class="about-text"><strong>Fatih Sultan Mehmet</strong> ve <strong>Mustafa Kemal Atatürk</strong> gibi tarihsel liderleri rehber alıyorum. Türkiye'nin en temel sorunları arasında anayasal hak ihlalleri, ifade özgürlüğü eksikliği ve kurumsal usulsüzlükleri görüyorum.</p>
         <p class="about-text">2023 yılında <strong>Kabataş Erkek Lisesi Hukuk Kulübü</strong>'nü kurarak anayasa, temel hak ve özgürlükler gibi konuları öğrenci arkadaşlarımla tartışabileceğim bir platform oluşturdum.</p>
         <div class="social-links">
-          <a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link">𝕏</a>
-          <a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link">in</a>
-          <a href="mailto:iletisim@ahmethaktaneker.com" class="social-link">✉</a>
+          <a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="X / Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.261 5.624L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://youtube.com/@HaktanPodcast" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="mailto:iletisim@ahmethaktaneker.com" class="social-link" title="E-posta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
         </div>
       </div>
     </div>
@@ -393,9 +402,11 @@
         <div class="footer-brand-name">Ahmet Haktan <span>Eker</span></div>
         <p class="footer-tagline">Siyaset, anayasa ve toplum üzerine bağımsız bir ses.</p>
         <div class="social-links">
-          <a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link">𝕏</a>
-          <a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link">in</a>
-          <a href="mailto:iletisim@ahmethaktaneker.com" class="social-link">✉</a>
+          <a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="X / Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.261 5.624L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://youtube.com/@HaktanPodcast" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="mailto:iletisim@ahmethaktaneker.com" class="social-link" title="E-posta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
         </div>
       </div>
       <nav><div class="footer-col-head">Kategoriler</div>
@@ -418,6 +429,8 @@
         <ul class="footer-links">
           <li><a href="mailto:iletisim@ahmethaktaneker.com">E-posta</a></li>
           <li><a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer">X / Twitter</a></li>
+          <li><a href="https://instagram.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://youtube.com/@HaktanPodcast" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           <li><a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         </ul>
       </div>
@@ -440,7 +453,7 @@
       if(!feat.length){el.style.display='none';return;}
       el.style.display='grid';
       const m=feat[0],s=feat[1];
-      let h=`<a class="featured-main" href="yazilar/${m.slug}/"><div><span class="post-tag">${m.categoryLabel}</span><h3 class="post-title-lg">${m.title}</h3><p class="post-excerpt">${m.excerpt}</p></div><div class="post-meta"><span>${m.date}</span><span class="post-meta-dot"></span><span>${m.readTime} okuma</span></div></a>`;
+      let h=`<div style="position:relative"><button class="bm-btn${getBookmarks().includes(m.slug)?' saved':''}" onclick="event.stopPropagation();toggleBm('${m.slug}',this)" title="Kaydet" style="top:1rem;right:1rem">${bmIcon(getBookmarks().includes(m.slug))}</button><a class="featured-main" href="yazilar/${m.slug}/"><div><span class="post-tag">${m.categoryLabel}</span><h3 class="post-title-lg">${m.title}</h3><p class="post-excerpt">${m.excerpt}</p></div><div class="post-meta"><span>${m.date}</span><span class="post-meta-dot"></span><span>${m.readTime} okuma</span></div></a></div>`;
       if(s){h+=`<div class="featured-side"><a class="featured-side-item" href="yazilar/${s.slug}/"><div><span class="post-tag">${s.categoryLabel}</span><h3 class="post-title-sm">${s.title}</h3><p class="post-excerpt" style="font-size:.93rem">${s.excerpt}</p></div><div class="post-meta"><span>${s.date}</span><span class="post-meta-dot"></span><span>${s.readTime} okuma</span></div></a>${rest.slice(0,1).map(p=>`<a class="featured-side-item" href="yazilar/${p.slug}/"><div><span class="post-tag">${p.categoryLabel}</span><h3 class="post-title-sm">${p.title}</h3></div><div class="post-meta"><span>${p.date}</span><span class="post-meta-dot"></span><span>${p.readTime} okuma</span></div></a>`).join('')}</div>`;}
       el.innerHTML=h;
     }
@@ -448,7 +461,7 @@
       const nf=list.filter(p=>!p.featured);
       document.getElementById('postsGrid').innerHTML=!nf.length
         ?'<div style="padding:2rem;color:var(--text-muted);font-family:\'JetBrains Mono\',monospace;font-size:.75rem">Bu kategoride daha fazla yazı yok.</div>'
-        :nf.map(p=>`<a class="post-card" href="yazilar/${p.slug}/"><div class="post-card-body"><span class="post-tag">${p.categoryLabel}</span><h3 class="post-title-sm" style="margin-bottom:.7rem;font-size:1.08rem">${p.title}</h3><p class="post-excerpt">${p.excerpt}</p></div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem"><div class="post-meta"><span>${p.date}</span><span class="post-meta-dot"></span><span>${p.readTime}</span></div><span class="post-arrow">→</span></div></a>`).join('');
+        :nf.map(p=>{const saved=getBookmarks().includes(p.slug);return`<div class="post-card" style="position:relative"><button class="bm-btn${saved?' saved':''}" onclick="event.stopPropagation();toggleBm('${p.slug}',this)" title="${saved?'Kaydedilenlerden çıkar':'Kaydet'}">${bmIcon(saved)}</button><a href="yazilar/${p.slug}/" style="display:flex;flex-direction:column;height:100%;color:inherit"><div class="post-card-body"><span class="post-tag">${p.categoryLabel}</span><h3 class="post-title-sm" style="margin-bottom:.7rem;font-size:1.08rem">${p.title}</h3><p class="post-excerpt">${p.excerpt}</p></div><div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem"><div class="post-meta"><span>${p.date}</span><span class="post-meta-dot"></span><span>${p.readTime}</span></div><span class="post-arrow">→</span></div></a></div>`}).join('');
     }
     function filterPosts(cat,btn){
       document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
@@ -535,20 +548,32 @@
     }
 
     /* ── BOOKMARKS ── */
+    function bmIcon(saved){return saved?'<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>':'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';}
     function getBookmarks(){try{return JSON.parse(localStorage.getItem('ahe_bookmarks')||'[]');}catch{return[];}}
+    function toggleBm(slug,btn){
+      let bms=getBookmarks();
+      const idx=bms.indexOf(slug);
+      if(idx>=0){bms.splice(idx,1);btn.classList.remove('saved');btn.title='Kaydet';}
+      else{bms.push(slug);btn.classList.add('saved');btn.title='Kaydedilenlerden çıkar';}
+      btn.innerHTML=bmIcon(idx<0);
+      localStorage.setItem('ahe_bookmarks',JSON.stringify(bms));
+      /* widget açıksa güncelle */
+      if(document.getElementById('ahe-bookmarks').classList.contains('open'))renderBmList();
+    }
+    function renderBmList(){
+      const bms=getBookmarks();
+      const list=document.getElementById('bmList');
+      if(!bms.length){list.innerHTML='<li><div class="bm-empty">Henüz kayıt yok.</div></li>';return;}
+      const postMap={};posts.forEach(p=>postMap[p.slug]=p);
+      list.innerHTML=bms.map(slug=>{
+        const p=postMap[slug];
+        return p?`<li><a href="yazilar/${p.slug}/">${p.title}</a><button onclick="toggleBm('${p.slug}',this.previousSibling)" style="float:right;color:var(--text-faint);font-size:.7rem;padding:.1rem .3rem;border:1px solid var(--border);border-radius:2px;background:transparent;cursor:pointer;font-family:'JetBrains Mono',monospace" title="Kaldır">✕</button></li>`:'';
+      }).filter(Boolean).join('');
+    }
     function toggleBookmarks(){
       const w=document.getElementById('ahe-bookmarks');
       const isOpen=w.classList.toggle('open');
-      if(isOpen){
-        const bms=getBookmarks();
-        const list=document.getElementById('bmList');
-        if(!bms.length){list.innerHTML='<li><div class="bm-empty">Henüz kayıt yok.</div></li>';return;}
-        const postMap={};posts.forEach(p=>postMap[p.slug]=p);
-        list.innerHTML=bms.map(slug=>{
-          const p=postMap[slug];
-          return p?`<li><a href="yazilar/${p.slug}/">${p.title}</a></li>`:'';
-        }).filter(Boolean).join('');
-      }
+      if(isOpen)renderBmList();
     }
 
     /* ── PARTICLES ── */
@@ -629,6 +654,9 @@
     initReveal();
     initParticles();
     initPageTransitions();
+    /* Hero stats otomatik */
+    document.getElementById('statCount').textContent=posts.length;
+    document.getElementById('statCats').textContent=[...new Set(posts.map(p=>p.category))].length;
 
     /* Zaten abone olan kullaniciya butonu baska goster */
     if(localStorage.getItem('ahe_subscribed')){

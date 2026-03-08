@@ -52,6 +52,18 @@
     .qt-btn:hover{border-color:var(--accent);color:var(--accent)}
     #ahe-toc{position:fixed;right:2rem;top:50%;transform:translateY(-50%);z-index:80;max-width:190px;display:none}
     @media(min-width:1280px){#ahe-toc{display:block}}
+    /* Tablet TOC (collapse kutu) */
+    #ahe-toc-mobile{display:none;margin:0 0 2rem;background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+    @media(min-width:700px) and (max-width:1279px){#ahe-toc-mobile{display:block}}
+    .toc-mobile-head{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;cursor:pointer;user-select:none}
+    .toc-mobile-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
+    .toc-mobile-arrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-faint);transition:transform .2s}
+    .toc-mobile-arrow.open{transform:rotate(180deg)}
+    .toc-mobile-list{padding:0 1.25rem 1rem;display:none}
+    .toc-mobile-list.open{display:block}
+    .toc-mobile-link{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--text-faint);padding:.3rem 0;border-bottom:1px solid var(--border);transition:color .2s}
+    .toc-mobile-link:last-child{border-bottom:none}
+    .toc-mobile-link:hover{color:var(--accent)}
     #ahe-toc-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.75rem}
     .toc-link{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--text-faint);padding:.28rem 0 .28rem .75rem;border-left:1px solid var(--border);margin-bottom:.15rem;transition:all .2s;line-height:1.4}
     .toc-link:hover,.toc-link.active{color:var(--accent);border-left-color:var(--accent)}
@@ -60,7 +72,7 @@
     .article-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--headline);line-height:1.1;margin-bottom:1.5rem}
     .article-meta{display:flex;align-items:center;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--text-faint);margin-bottom:.75rem;flex-wrap:wrap}
     .article-meta-dot{width:2px;height:2px;background:var(--text-faint);border-radius:50%}
-    .article-share{display:flex;align-items:center;gap:.5rem;padding:1.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:3rem;flex-wrap:wrap}
+    .article-share{display:flex;align-items:center;gap:.5rem;padding:1.25rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:3rem;flex-wrap:wrap;width:100%}
     .share-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-faint);margin-right:.25rem}
     .share-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .8rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:all .18s}
     .share-btn:hover{border-color:var(--accent);color:var(--accent)}
@@ -128,6 +140,8 @@
     .font-controls.visible{opacity:1;transform:translateY(0);pointer-events:all}
     .fc-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:4px;background:var(--bg2);color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.75rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s}
     .fc-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .social-link{width:32px;height:32px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s}
+    .social-link:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
     @media(max-width:640px){.inline-cta{flex-direction:column;gap:1rem}.icta-form{flex-direction:column}.icta-input{width:100%}.font-controls{display:none}}
   </style>
 </head>
@@ -150,10 +164,13 @@
   <nav id="ahe-toc"></nav>
 
   <nav class="nav">
-    <a href="../../" class="nav-back">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      Ana Sayfa
-    </a>
+    <div style="display:flex;align-items:center;gap:1.25rem">
+      <a href="../../" class="nav-back">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span>Ana Sayfa</span>
+      </a>
+      <a href="../" class="nav-back" style="opacity:.65">Arşiv</a>
+    </div>
     <a href="../../" class="nav-logo">AHE<span>.</span></a>
     <div class="nav-right">
       <button class="nav-icon-btn" onclick="toggleFontControls()" aria-label="Yazı boyutu" title="Yazı boyutu"><span style="font-size:.75rem;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.02em">Aa</span></button>
@@ -181,7 +198,19 @@
       <div class="article-share">
         <span class="share-label">Paylaş</span>
         <a class="share-btn" id="twitterShareBtn" href="#" target="_blank" rel="noopener noreferrer">𝕏 Twitter</a>
-        <button class="share-btn" onclick="copyPageLink(this)">🔗 Linki Kopyala</button>
+        <button class="share-btn" onclick="copyPageLink(this)" id="copyLinkBtn">🔗 Linki Kopyala</button>
+        <button class="share-btn" id="articleBmBtn" onclick="toggleArticleBm(this)" style="margin-left:auto">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="bmSvg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span id="bmBtnLabel">Kaydet</span>
+        </button>
+      </div>
+
+      <div id="ahe-toc-mobile">
+        <div class="toc-mobile-head" onclick="toggleMobileToc()">
+          <span class="toc-mobile-label">İçindekiler</span>
+          <span class="toc-mobile-arrow" id="tocMobileArrow">▾</span>
+        </div>
+        <div class="toc-mobile-list" id="tocMobileList"></div>
       </div>
 
       <div class="article-body" itemprop="articleBody" id="articleBody">
@@ -311,22 +340,88 @@
     </article>
   </main>
 
-  <footer class="article-footer">
-    <div class="af-brand">Ahmet Haktan <span>Eker</span></div>
-    <nav class="af-links">
-      <a href="../../">Ana Sayfa</a>
-      <a href="../">Tüm Yazılar</a>
-      <a href="../../#hakkimda">Hakkımda</a>
-      <a href="../../#iletisim">İletişim</a>
-    </nav>
-    <div class="af-copy">© 2025 Ahmet Haktan Eker</div>
+  <footer style="background:var(--bg2);border-top:1px solid var(--border);padding:2.5rem clamp(1.5rem,5vw,4rem)">
+    <div style="max-width:740px;margin:0 auto;display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--headline);margin-bottom:.5rem">Ahmet Haktan <span style="color:var(--accent)">Eker</span></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-faint);margin-bottom:1rem">Siyaset · Anayasa · Demokrasi</div>
+        <div style="display:flex;gap:.5rem">
+          <a href="https://x.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.73-8.835L1.254 2.25H8.08l4.261 5.624L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          <a href="https://youtube.com/@HaktanPodcast" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://linkedin.com/in/ahmethaktaneker" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="mailto:iletisim@ahmethaktaneker.com" class="social-link" title="E-posta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+        </div>
+      </div>
+      <nav style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.4rem">Sayfalar</div>
+        <a href="../../" style="font-size:.9rem;color:var(--text-muted);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Ana Sayfa</a>
+        <a href="../" style="font-size:.9rem;color:var(--text-muted);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Tüm Yazılar</a>
+        <a href="../../#hakkimda" style="font-size:.9rem;color:var(--text-muted);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Hakkımda</a>
+        <a href="../../#iletisim" style="font-size:.9rem;color:var(--text-muted);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">İletişim</a>
+      </nav>
+    </div>
+    <div style="max-width:740px;margin:1.5rem auto 0;padding-top:1.25rem;border-top:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--text-faint)">© 2025 Ahmet Haktan Eker · ahmethaktaneker.com</div>
   </footer>
 
   <script>
+
+    /* ── MOBİL TOC ── */
+    function toggleMobileToc(){
+      const list=document.getElementById('tocMobileList');
+      const arrow=document.getElementById('tocMobileArrow');
+      const open=list.classList.toggle('open');
+      arrow.classList.toggle('open',open);
+    }
+    function buildMobileTOC(){
+      const headings=document.querySelectorAll('#articleBody h2');
+      if(headings.length<2){document.getElementById('ahe-toc-mobile').style.display='none';return;}
+      const list=document.getElementById('tocMobileList');
+      list.innerHTML=Array.from(headings).map((h,i)=>{
+        if(!h.id)h.id='toc-sec-'+i;
+        return `<a class="toc-mobile-link" href="#${h.id}">${h.textContent}</a>`;
+      }).join('');
+    }
+
+    /* ── MAKALE BOOKMARK ── */
+    const ART_SLUG='anayasa-mahkemesi-mesruiyet';
+    function getArticleBookmarks(){try{return JSON.parse(localStorage.getItem('ahe_bookmarks')||'[]');}catch{return[];}}
+    function toggleArticleBm(btn){
+      let bms=getArticleBookmarks();
+      const idx=bms.indexOf(ART_SLUG);
+      if(idx>=0){
+        bms.splice(idx,1);
+        document.getElementById('bmSvg').setAttribute('fill','none');
+        document.getElementById('bmBtnLabel').textContent='Kaydet';
+        btn.classList.remove('saved');
+      } else {
+        bms.push(ART_SLUG);
+        document.getElementById('bmSvg').setAttribute('fill','currentColor');
+        document.getElementById('bmBtnLabel').textContent='Kaydedildi';
+        btn.classList.add('saved');
+      }
+      localStorage.setItem('ahe_bookmarks',JSON.stringify(bms));
+    }
+    function initArticleBm(){
+      const bms=getArticleBookmarks();
+      if(bms.includes(ART_SLUG)){
+        document.getElementById('bmSvg').setAttribute('fill','currentColor');
+        document.getElementById('bmBtnLabel').textContent='Kaydedildi';
+        document.getElementById('articleBmBtn').classList.add('saved');
+      }
+    }
+
+    /* ── DİNAMİK SAYFA BAŞLIĞI (okuma %) ── */
+    let _titleBase=document.title;
     window.addEventListener('scroll',()=>{
       const el=document.documentElement;
-      document.getElementById('read-progress').style.width=Math.min((window.scrollY/(el.scrollHeight-el.clientHeight))*100,100)+'%';
+      const pct=Math.round(Math.min((window.scrollY/(el.scrollHeight-el.clientHeight))*100,100));
+      document.getElementById('read-progress').style.width=pct+'%';
+      if(pct>5&&pct<99)document.title=pct+'% — '+_titleBase;
+      else document.title=_titleBase;
     },{passive:true});
+
+
 
     function buildTOC(){
       const headings=document.querySelectorAll('#articleBody h2');
@@ -491,8 +586,10 @@
     }
     loadTheme();
     buildTOC();
+    buildMobileTOC();
     calcReadTime();
     applyFont();
+    initArticleBm();
 
     /* Zaten abone - inline CTA'yi gizle */
     if(localStorage.getItem('ahe_subscribed')){
