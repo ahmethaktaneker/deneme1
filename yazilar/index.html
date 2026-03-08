@@ -131,6 +131,25 @@
     @keyframes expandWidth{from{width:0}to{width:80px}}
     @media(max-width:1000px){.nav-links{display:none}.hamburger{display:flex}.hero-stats{display:none}}
     @media(max-width:700px){.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}.filter-inner{gap:.75rem}}
+
+    /* EXIT INTENT */
+    .exit-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(8px)}
+    .exit-overlay.open{opacity:1;pointer-events:all}
+    .exit-box{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:2.5rem;max-width:440px;width:90%;position:relative}
+    .exit-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+    .exit-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--headline);line-height:1.25;margin-bottom:.75rem}
+    .exit-desc{font-size:.95rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.5rem}
+    .exit-form{display:flex;gap:.5rem}
+    .exit-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:.55rem .85rem;font-family:'Crimson Pro',serif;font-size:.95rem;color:var(--text);outline:none;transition:border-color .2s}
+    .exit-input:focus{border-color:var(--accent)}
+    .exit-input::placeholder{color:var(--text-faint)}
+    .exit-sub{padding:.55rem 1.1rem;background:var(--accent);color:var(--bg);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background .2s}
+    .exit-sub:hover{background:#d4b87a}
+    .exit-close{position:absolute;top:.75rem;right:.75rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);border-radius:3px;transition:color .2s;font-size:.85rem}
+    .exit-close:hover{color:var(--text)}
+    .exit-skip{display:block;text-align:center;margin-top:.85rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:var(--text-faint);cursor:pointer;transition:color .2s}
+    .exit-skip:hover{color:var(--text-muted)}
+    .exit-msg{font-family:'JetBrains Mono',monospace;font-size:.63rem;margin-top:.5rem;letter-spacing:.04em}
     @media(max-width:640px){.post-row{grid-template-columns:1fr;gap:.5rem}.pr-date{display:none}.pr-right{flex-direction:row;align-items:center;gap:1rem;padding-top:.25rem}}
     @media(max-width:500px){.footer-inner{grid-template-columns:1fr}}
   </style>
@@ -251,6 +270,22 @@
     </div>
   </footer>
 
+
+  <!-- EXIT INTENT -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-box">
+      <button class="exit-close" onclick="closeExit()">✕</button>
+      <div class="exit-tag">Gitmeden önce</div>
+      <div class="exit-title">Yeni yazıları kaçırmayın.</div>
+      <div class="exit-desc">Anayasa, demokrasi ve Türkiye siyaseti üzerine analizler — doğrudan e-postanıza.</div>
+      <div class="exit-form">
+        <input type="email" class="exit-input" id="exitEmail" placeholder="E-posta adresiniz" autocomplete="email" onkeydown="if(event.key==='Enter')exitSubscribe()" />
+        <button class="exit-sub" onclick="exitSubscribe()">Abone Ol</button>
+      </div>
+      <div class="exit-msg" id="exitMsg"></div>
+      <span class="exit-skip" onclick="closeExit()">Hayır teşekkürler, kaçırırım.</span>
+    </div>
+  </div>
   <script>
     const posts=[
       {slug:"anayasa-mahkemesi-mesruiyet",title:"Anayasa Mahkemesi'nin İşlevi ve Meşruiyet Krizi",excerpt:"Yargısal denetim, demokratik sistemin bel kemiğidir. Peki Türkiye'de bu denetim mekanizması ne ölçüde işlevseldir? Anayasa Mahkemesi'nin tarihsel rolünü ve güncel krizini mercek altına alıyoruz.",category:"anayasa",categoryLabel:"Anayasa",date:"15 Ocak 2025",year:2025,readTime:"8 dk",featured:true}
@@ -260,7 +295,7 @@
     function filterArchive(){
       const q=document.getElementById('archiveSearch').value.toLowerCase().trim();
       const filtered=posts.filter(p=>{
-        const mQ=!q||p.title.toLowerCase().includes(q)||p.excerpt.toLowerCase().includes(q)||p.categoryLabel.toLowerCase().includes(q);
+        const mQ=!q||p.title.toLowerCase().includes(q)||p.excerpt.toLowerCase().includes(q)||p.categoryLabel.toLowerCase().includes(q)||(p.tags||[]).some(t=>t.toLowerCase().includes(q));
         const mC=activeCat==='tumu'||p.category===activeCat;
         return mQ&&mC;
       });
