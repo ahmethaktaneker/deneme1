@@ -138,7 +138,7 @@
   <div class="font-controls" id="fontControls">
     <button class="fc-btn" onclick="setFont(1)" title="Büyüt">A+</button>
     <button class="fc-btn" onclick="setFont(-1)" title="Küçült">A−</button>
-    <button class="fc-btn" onclick="resetFont()" title="Sıfırla" style="font-size:.55rem">&#8635;</button>
+    <button class="fc-btn" onclick="resetFont()" title="Varsayılan boyut"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
   </div>
 
   <div id="quote-tooltip">
@@ -156,8 +156,7 @@
     </a>
     <a href="../../" class="nav-logo">AHE<span>.</span></a>
     <div class="nav-right">
-      <button class="nav-icon-btn" id="fcToggle" onclick="toggleFontControls()" aria-label="Yazı boyutu"><span style="font-size:.7rem;font-family:serif">Aa</span></button>
-      <button class="nav-icon-btn" onclick="toggleFontControls()" aria-label="Yazı boyutu" title="Yazı boyutu"><span style="font-size:.7rem;font-family:serif;font-weight:700">Aa</span></button>
+      <button class="nav-icon-btn" onclick="toggleFontControls()" aria-label="Yazı boyutu" title="Yazı boyutu"><span style="font-size:.75rem;font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.02em">Aa</span></button>
       <button class="nav-icon-btn" onclick="toggleTheme()" aria-label="Tema değiştir"><span id="theme-icon">☀</span></button>
     </div>
   </nav>
