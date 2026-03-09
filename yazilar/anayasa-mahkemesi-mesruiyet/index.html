@@ -46,8 +46,10 @@
 
     /* NAV */
 
-    .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,13,19,0.82);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px) saturate(1.6);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;transition:background .35s}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,13,19,0.82);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px) saturate(1.6);border-bottom:1px solid transparent;padding:0 clamp(1rem,4vw,3rem);height:64px;display:flex;align-items:center;justify-content:space-between;transition:border-color .3s,background .35s}
+    .nav.scrolled{border-bottom-color:var(--border)}
     [data-theme="light"] .nav{background:rgba(246,242,234,0.82)}
+    [data-theme="light"] .nav.scrolled{border-bottom-color:var(--border)}
     .nav-left{display:flex;align-items:center;gap:1.25rem}
     .nav-back{display:flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);transition:color .2s}
     .nav-back:hover{color:var(--accent)}
@@ -72,17 +74,18 @@
     .qt-btn:hover{border-color:var(--accent);color:var(--accent)}
 
     /* MASAÜSTÜ TOC — yazı bitince gizlenir */
-    #ahe-toc{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:80;width:180px;display:none;transition:opacity .35s,transform .35s}
-    #ahe-toc.toc-hidden{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(16px)}
+    #ahe-toc{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);z-index:80;width:210px;display:none;transition:opacity .35s,transform .35s;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem}
+    #ahe-toc.toc-hidden{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(18px)}
     @media(min-width:1080px){#ahe-toc{display:block}}
-    #ahe-toc-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+    #ahe-toc-label{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
     #ahe-toc-label::before{content:'';display:block;width:14px;height:1px;background:var(--accent)}
-    .toc-link{display:block;font-family:'JetBrains Mono',monospace;font-size:.57rem;letter-spacing:.05em;color:var(--text-faint);padding:.28rem 0 .28rem .75rem;border-left:1px solid var(--border);margin-bottom:.15rem;transition:all .2s;line-height:1.4}
-    .toc-link:hover,.toc-link.active{color:var(--accent);border-left-color:var(--accent)}
+    .toc-link{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.04em;color:var(--text-faint);padding:.3rem 0 .3rem .7rem;border-left:1px solid var(--border);margin-bottom:.2rem;transition:all .22s;line-height:1.45}
+    .toc-link:hover{color:var(--text-muted);border-left-color:var(--border2)}
+    .toc-link.active{color:var(--accent);border-left-color:var(--accent);padding-left:.6rem;font-weight:500}
 
     /* TABLET TOC */
     .toc-mobile-wrap{display:none;margin:0 0 2rem;background:var(--bg2);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    @media(min-width:700px) and (max-width:1279px){.toc-mobile-wrap{display:block}}
+    @media(min-width:700px) and (max-width:1079px){.toc-mobile-wrap{display:block}}
     .toc-mobile-head{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;cursor:pointer;user-select:none}
     .toc-m-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
     .toc-m-arrow{font-size:.7rem;color:var(--text-faint);transition:transform .2s;line-height:1}
@@ -95,8 +98,8 @@
 
     /* MAKALE */
     .article-wrap{max-width:740px;margin:0 auto;padding:5rem clamp(1.5rem,5vw,2rem) 5rem}
-    @media(min-width:1080px){.article-wrap{margin-left:clamp(2rem,calc(50vw - 490px),30rem);margin-right:auto}}
-    @media(min-width:1520px){.article-wrap{margin:0 auto}}
+    @media(min-width:1080px){.article-wrap{margin-left:auto;margin-right:260px}}
+    @media(min-width:1600px){.article-wrap{margin-right:auto}}
     .article-tag{display:inline-block;padding:.22rem .65rem;background:var(--tag-bg);color:var(--tag-text);font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;margin-bottom:1.5rem}
     .article-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--headline);line-height:1.1;margin-bottom:1.5rem}
     .article-meta{display:flex;align-items:center;gap:.75rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--text-faint);margin-bottom:.75rem;flex-wrap:wrap}
@@ -151,43 +154,6 @@
     .finish-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .85rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);transition:all .18s;background:transparent}
     .finish-btn:hover{border-color:var(--accent);color:var(--accent)}
     .finish-close{padding:.3rem .5rem}
-
-
-    /* ── ALINTI KARTI MODALİ ── */
-    .qcard-overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(12px)}
-    .qcard-overlay.open{opacity:1;pointer-events:all}
-    .qcard-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:2rem;max-width:520px;width:92%;position:relative}
-    .qcard-preview{background:linear-gradient(135deg,#0b0d13 0%,#12151e 100%);border:1px solid rgba(201,169,110,.2);border-radius:6px;padding:2rem;margin-bottom:1.5rem;min-height:140px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-    .qcard-preview::before{content:'\201C';position:absolute;top:-.5rem;left:.5rem;font-family:'Playfair Display',serif;font-size:6rem;color:rgba(201,169,110,.12);line-height:1;pointer-events:none}
-    .qcard-text{font-family:'Crimson Pro',serif;font-size:1.05rem;font-style:italic;color:#f2ece0;line-height:1.65;flex:1;margin-bottom:1rem;word-break:break-word}
-    .qcard-byline{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,169,110,.7);display:flex;align-items:center;justify-content:space-between}
-    .qcard-actions{display:flex;gap:.6rem;flex-wrap:wrap}
-    .qcard-btn{padding:.4rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);background:transparent;transition:all .18s;cursor:pointer}
-    .qcard-btn:hover{border-color:var(--accent);color:var(--accent)}
-    .qcard-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-    .qcard-btn.primary:hover{background:#d4b87a}
-    .qcard-close{position:absolute;top:.6rem;right:.6rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);cursor:pointer;border-radius:3px;font-size:.85rem;transition:color .2s}
-    .qcard-close:hover{color:var(--text)}
-    .qcard-head{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:1.25rem}
-
-    /* ── BAŞLIK ANCHOR LİNKLERİ ── */
-    .article-body h2{position:relative}
-    .heading-anchor{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:3px;color:var(--text-faint);font-family:'JetBrains Mono',monospace;font-size:.65rem;text-decoration:none;margin-left:.5rem;opacity:0;transition:opacity .2s,color .2s;vertical-align:middle;flex-shrink:0}
-    .article-body h2:hover .heading-anchor{opacity:1}
-    .heading-anchor:hover{color:var(--accent)}
-
-    /* ── TOC geliştirilmiş görünüm ── */
-    #ahe-toc{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem}
-    .toc-link.active{color:var(--accent);border-left-color:var(--accent);background:linear-gradient(90deg,var(--accent-dim),transparent);padding-left:.6rem;font-weight:500}
-
-    /* ── QUOTE TOOLTIP geliştirilmiş: kart butonu ── */
-    #quote-tooltip{display:flex;gap:.35rem}
-    .qt-btn-card{display:inline-flex;align-items:center;gap:.3rem;padding:.32rem .65rem;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:#c9a96e;cursor:pointer;white-space:nowrap;transition:all .18s}
-    .qt-btn-card:hover{background:rgba(201,169,110,.25)}
-
-    /* ── ZİYARETÇİ SAYACI animasyonu ── */
-    @keyframes countUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    #visitCountDisplay{animation:countUp .6s ease both .5s}
 
     /* YORUM SİSTEMİ */
     .comments-section{border-top:1px solid var(--border);margin-top:3rem;padding-top:2.5rem}
@@ -282,8 +248,7 @@
     @media(max-width:699px){.time-left-badge{display:none}}
 
     /* ── TABLo OF CONTENTS aktif link parlak animasyon ── */
-    .toc-link.active{color:var(--accent);border-left-color:var(--accent);background:linear-gradient(90deg,var(--accent-dim),transparent);padding-left:.6rem}
-    .toc-link{transition:all .25s}
+
 
     /* FOOTER */
     .art-footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem clamp(1.5rem,5vw,4rem)}
@@ -365,10 +330,6 @@
         <span id="readTimeDisplay">8 dk okuma</span>
         <span class="article-meta-dot"></span>
         <span id="wordCountDisplay"></span>
-        <span class="article-meta-dot"></span>
-        <span id="articleAge" style="color:var(--text-faint)"></span>
-        <span class="article-meta-dot art-visit-sep" style="display:none"></span>
-        <span id="visitCountDisplay" style="color:var(--text-faint);display:none"></span>
       </div>
 
       <div class="article-share">
@@ -575,26 +536,6 @@
     </article>
   </main>
 
-  <!-- ALINTI KARTI MODALİ -->
-  <div class="qcard-overlay" id="qcardOverlay" onclick="if(event.target===this)closeQuoteCard()">
-    <div class="qcard-box">
-      <button class="qcard-close" onclick="closeQuoteCard()">✕</button>
-      <div class="qcard-head">✦ Alıntı Kartı Oluştur</div>
-      <div class="qcard-preview" id="qcardPreview">
-        <div class="qcard-text" id="qcardText"></div>
-        <div class="qcard-byline">
-          <span>ahmethaktaneker.com</span>
-          <span id="qcardTitle" style="opacity:.5;font-size:.52rem;max-width:55%;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
-        </div>
-      </div>
-      <div class="qcard-actions">
-        <button class="qcard-btn primary" onclick="copyQuoteCard()">✦ Metni Kopyala</button>
-        <button class="qcard-btn" onclick="tweetQuoteCard()">𝕏 Tweet Olarak Paylaş</button>
-        <button class="qcard-btn" onclick="closeQuoteCard()">Kapat</button>
-      </div>
-    </div>
-  </div>
-
   <!-- FOOTER — ince kompakt bant -->
   <footer class="art-footer">
     <div class="art-footer-inner">
@@ -627,6 +568,7 @@
       const el = document.documentElement;
       const pct = Math.round(Math.min((window.scrollY / (el.scrollHeight - el.clientHeight)) * 100, 100));
       document.getElementById('read-progress').style.width = pct + '%';
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 40);
       if (pct > 5 && pct < 99) document.title = pct + '% — ' + _titleBase;
       else document.title = _titleBase;
       /* Yazıyı bitirdi banner */
@@ -730,68 +672,8 @@
       const el = document.getElementById('articleAge');
       if (!el) return;
       const pub = new Date('2025-01-15');
-      const diff = Math.floor((Date.now() - pub) / (1000*60*60*24));
-      if(diff < 7) el.textContent = diff + ' gün önce';
-      else if(diff < 60) el.textContent = Math.floor(diff/7) + ' hafta önce';
-      else el.textContent = Math.floor(diff/30) + ' ay önce';
-    }
-    /* ── ZİYARETÇİ SAYACI ── */
-    function initVisitCounter() {
-      const key='ahe_visits_'+ART_ID;
-      let v=parseInt(localStorage.getItem(key)||'0');
-      /* Her ziyarette +1 (aynı oturum tekrar sayılmasın) */
-      if(!sessionStorage.getItem('ahe_counted_'+ART_ID)){
-        v++;
-        localStorage.setItem(key,v);
-        sessionStorage.setItem('ahe_counted_'+ART_ID,'1');
-      }
-      if(v>1){
-        const el=document.getElementById('visitCountDisplay');
-        const sep=document.querySelector('.art-visit-sep');
-        if(el){el.textContent=v+' okuma';el.style.display='';if(sep)sep.style.display='';}
-      }
-    }
-
-
-    /* ── ALINTI KARTI ── */
-    function openQuoteCard(){
-      const overlay=document.getElementById('qcardOverlay');
-      document.getElementById('qcardText').textContent=_sel;
-      document.getElementById('qcardTitle').textContent=document.title.split('|')[0].trim();
-      overlay.classList.add('open');
-      document.getElementById('quote-tooltip').classList.remove('visible');
-    }
-    function closeQuoteCard(){document.getElementById('qcardOverlay').classList.remove('open');}
-    function copyQuoteCard(){
-      const q=document.getElementById('qcardText').textContent;
-      navigator.clipboard.writeText('"'+q+'" — ahmethaktaneker.com').then(()=>{
-        const btn=document.querySelector('.qcard-btn.primary');
-        const orig=btn.textContent;btn.textContent='✓ Kopyalandı!';
-        setTimeout(()=>btn.textContent=orig,2000);
-      });
-    }
-    function tweetQuoteCard(){
-      const q=document.getElementById('qcardText').textContent;
-      window.open('https://x.com/intent/tweet?text='+encodeURIComponent('"'+q+'" — @ahmethaktaneker+' +encodeURIComponent(window.location.href)),'_blank');
-    }
-
-    /* ── BAŞLIK ANCHOR LİNKLERİ ── */
-    function addHeadingAnchors(){
-      document.querySelectorAll('#articleBody h2').forEach(h=>{
-        if(!h.id)return;
-        const a=document.createElement('a');
-        a.className='heading-anchor';
-        a.href='#'+h.id;
-        a.title='Bağlantıyı kopyala';
-        a.innerHTML='#';
-        a.addEventListener('click',e=>{
-          e.preventDefault();
-          navigator.clipboard.writeText(location.origin+location.pathname+'#'+h.id).then(()=>{
-            a.textContent='✓';setTimeout(()=>{a.textContent='#';},1800);
-          });
-        });
-        h.appendChild(a);
-      });
+      const diff = Math.floor((Date.now() - pub) / (1000*60*60*24*30));
+      el.textContent = diff > 0 ? diff + ' ay önce yayımlandı' : 'Yeni yayımlandı';
     }
 
     function buildTOC() {
@@ -910,60 +792,15 @@
     /* ── SENDER BÜLTEN ortak fonksiyon ── */
     const _STOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGZkMWU4MzA5YjhkNmQzYTRhOTViMTFkZDBlZWY2ZWY0NTM3NTE2OThlNDhkMzNkNjM5MTNjYzU5ZTk3NDgyMzY3NDhkMDM2YTgwZDZiNGQiLCJpYXQiOjE3NzI5NzQ1MDAuODE3MzU5LCJuYmYiOjE3NzI5NzQ1MDAuODE3MzYxLCJleHAiOjQ5MjY1NzQ1MDAuODE1Mjg0LCJzdWIiOiIxMDU4MDY5Iiwic2NvcGVzIjpbXX0.fjCEaLf9gFg-_S24F7ULabOy_Dq4bGl-K--eQVLVH95af6NUaxcU0jUX0c-V20XuzShgdO0ORmHS79bFT8CYV63bwlCPJV37NsKB67lwYwch0Keu7UWHkVrFTb4ICjY75B7UV9s_lWg_bEPkpECcQiniaZWsHY1v9sx9DoVa47fHcTzDHc_0_2O6OB3cHpOHtZ8QRH9RXKkhuhf_yA8qEs-audd3Mw8X3Is2sJr15mrWmtqw8EbYXXThBCKUrV-qerwjtvHqCHY2gcNNkH_E5zIxxsL-0m8qb_p5n7DPIvu73Inlbg8rUysRa8st2YsBM80PJaKSzCLtatspNnewdSNSY0jzwpl7OwEArHW0AA975QY3yYZykkonClUrm9Rqu7I2BvDop_-XrroU4yehiB_mCO9XA6AKp9oozGjoGuszN7maIRUWCknTx0hlbJbCXv-wUavPyriyrnij4sOUdUBY7MyjArOk7I9QeepxHIPfgxtHHUu3AUjzCWBfaWa1u3smiqM9ga8KNgb2KEK1Ojm0FT7LK4a648hxGBeIAwEdqPdlsCUx55NuQz24DxAVN8DRqJykdAf893wU8xvkcDPXcqlQ1AblKdlnzmm_8DBwVLaZTD6fmLedGxI5lzEwNc4EMpZwnaK5kawKy4TbAqyHYUF3A7JEnbw1EfXIRTU';
     async function senderSubscribe(email){
-      /* Sender.net API — CORS destekli, tarayıcıdan doğrudan çalışır */
       const res=await fetch('https://api.sender.net/v2/subscribers',{
         method:'POST',
-        mode:'cors',
-        headers:{
-          'Authorization':'Bearer '+_STOKEN,
-          'Content-Type':'application/json',
-          'Accept':'application/json'
-        },
+        headers:{'Authorization':'Bearer '+_STOKEN,'Content-Type':'application/json'},
         body:JSON.stringify({email,groups:['dPKvX1']})
       });
-      /* 201 = oluşturuldu, 200 = OK, 422 = zaten kayıtlı */
-      if(res.ok||res.status===201||res.status===422){return{ok:true};}
-      let msg='Sunucu hatası ('+res.status+').';
-      try{const d=await res.json();msg=d.message||d.error||msg;}catch(e){}
-      throw new Error(msg);
+      const d=await res.json().catch(()=>({}));
+      if(res.ok||res.status===422)return{ok:true};
+      throw new Error(d.message||'Sunucu hatası ('+res.status+')');
     }
-
-    /* ── ALINTI KARTI MODALİ ── */
-    .qcard-overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(12px)}
-    .qcard-overlay.open{opacity:1;pointer-events:all}
-    .qcard-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:2rem;max-width:520px;width:92%;position:relative}
-    .qcard-preview{background:linear-gradient(135deg,#0b0d13 0%,#12151e 100%);border:1px solid rgba(201,169,110,.2);border-radius:6px;padding:2rem;margin-bottom:1.5rem;min-height:140px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-    .qcard-preview::before{content:'\201C';position:absolute;top:-.5rem;left:.5rem;font-family:'Playfair Display',serif;font-size:6rem;color:rgba(201,169,110,.12);line-height:1;pointer-events:none}
-    .qcard-text{font-family:'Crimson Pro',serif;font-size:1.05rem;font-style:italic;color:#f2ece0;line-height:1.65;flex:1;margin-bottom:1rem;word-break:break-word}
-    .qcard-byline{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,169,110,.7);display:flex;align-items:center;justify-content:space-between}
-    .qcard-actions{display:flex;gap:.6rem;flex-wrap:wrap}
-    .qcard-btn{padding:.4rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);background:transparent;transition:all .18s;cursor:pointer}
-    .qcard-btn:hover{border-color:var(--accent);color:var(--accent)}
-    .qcard-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-    .qcard-btn.primary:hover{background:#d4b87a}
-    .qcard-close{position:absolute;top:.6rem;right:.6rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);cursor:pointer;border-radius:3px;font-size:.85rem;transition:color .2s}
-    .qcard-close:hover{color:var(--text)}
-    .qcard-head{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:1.25rem}
-
-    /* ── BAŞLIK ANCHOR LİNKLERİ ── */
-    .article-body h2{position:relative}
-    .heading-anchor{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:3px;color:var(--text-faint);font-family:'JetBrains Mono',monospace;font-size:.65rem;text-decoration:none;margin-left:.5rem;opacity:0;transition:opacity .2s,color .2s;vertical-align:middle;flex-shrink:0}
-    .article-body h2:hover .heading-anchor{opacity:1}
-    .heading-anchor:hover{color:var(--accent)}
-
-    /* ── TOC geliştirilmiş görünüm ── */
-    #ahe-toc{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem}
-    .toc-link.active{color:var(--accent);border-left-color:var(--accent);background:linear-gradient(90deg,var(--accent-dim),transparent);padding-left:.6rem;font-weight:500}
-
-    /* ── QUOTE TOOLTIP geliştirilmiş: kart butonu ── */
-    #quote-tooltip{display:flex;gap:.35rem}
-    .qt-btn-card{display:inline-flex;align-items:center;gap:.3rem;padding:.32rem .65rem;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:#c9a96e;cursor:pointer;white-space:nowrap;transition:all .18s}
-    .qt-btn-card:hover{background:rgba(201,169,110,.25)}
-
-    /* ── ZİYARETÇİ SAYACI animasyonu ── */
-    @keyframes countUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    #visitCountDisplay{animation:countUp .6s ease both .5s}
-
     /* YORUM SİSTEMİ */
     function getComments(){try{return JSON.parse(localStorage.getItem('ahe_cmts_'+ART_ID)||'[]');}catch{return[];}}
     function saveComments(a){try{localStorage.setItem('ahe_cmts_'+ART_ID,JSON.stringify(a));}catch(e){console.warn('localStorage yazma hatası',e);}}
@@ -1004,7 +841,7 @@
       }).join('');
     }
     function validateEmail(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
-    async function submitComment(){
+    function submitComment(){
       const nameEl=document.getElementById('cfName');
       const emailEl=document.getElementById('cfEmail');
       const textEl=document.getElementById('cfText');
@@ -1018,36 +855,24 @@
       /* Submit */
       btn.disabled=true;
       btn.innerHTML='<span style="opacity:.6">Gönderiliyor...</span>';
-      try {
-        /* FormSubmit.co — e-posta bildirimi gönderir, CORS destekli */
-        await fetch('https://formsubmit.co/ajax/iletisim@ahmethaktaneker.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            isim: name, eposta: email, yorum: text,
-            _subject: 'Yeni Yorum — ' + document.title.split('|')[0].trim(),
-            _captcha: 'false', _template: 'table'
-          })
-        }).catch(()=>{}); /* bağlantı yoksa sessizce devam et */
-        /* Yerel kayıt — her zaman çalışır */
+      /* Kısa gecikme — kullanıcı "bir şeyler oluyor" hisseder */
+      setTimeout(()=>{
         const arr=getComments();
-        arr.push({name,email:btoa(email),text,ts:Date.now()});
+        arr.push({name,email:btoa(email)/* e-posta şifreli sakla */,text,ts:Date.now()});
         saveComments(arr);
+        /* Formu temizle */
         nameEl.value='';emailEl.value='';textEl.value='';
         document.getElementById('cfChar').textContent='0 / 1200';
-        msg.innerHTML='<span style="color:var(--accent)">✓ Yorumunuz yayımlandı! Teşekkürler.</span>';
+        msg.innerHTML='<span style="color:var(--accent)">✓ Yorumunuz yayımlandı!</span>';
         btn.innerHTML='✓ Gönderildi';
-        btn.style.background='var(--accent)';btn.style.color='var(--bg)';
+        btn.style.background='#3a6e4a';
         setTimeout(()=>{
           msg.textContent='';btn.innerHTML='Yorum Gönder →';
-          btn.style.background='';btn.style.color='';btn.disabled=false;
+          btn.style.background='';btn.disabled=false;
         },4000);
         renderComments();
-        setTimeout(()=>document.getElementById('commentsList').lastElementChild?.scrollIntoView({behavior:'smooth',block:'nearest'}),200);
-      } catch(err) {
-        msg.innerHTML='<span style="color:var(--red)">⚠ Hata: '+err.message+'</span>';
-        btn.innerHTML='Yorum Gönder →';btn.disabled=false;
-      }
+        setTimeout(()=>document.getElementById('comments').scrollIntoView({behavior:'smooth',block:'start'}),100);
+      },600);
     }
     function showCfError(msg,el,text){
       msg.innerHTML='<span style="color:var(--red)">⚠ '+text+'</span>';
@@ -1138,8 +963,6 @@
     renderComments();
     renderLike();
     showArticleAge();
-    initVisitCounter();
-    addHeadingAnchors();
     setTimeout(checkReadPosition, 1200);
 
     if (localStorage.getItem('ahe_subscribed')) {
