@@ -42,6 +42,12 @@
     .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
     .nav-links a.active{color:var(--accent)}
     .nav-right{display:flex;align-items:center;gap:.6rem}
+
+    .nav-write-btn{display:none;align-items:center;gap:.4rem;padding:.28rem .8rem;height:34px;border:1px solid var(--border);border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .nav-write-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+    .nav-write-label{display:none}
+    @media(min-width:900px){.nav-write-btn{display:flex}}
+    @media(min-width:1100px){.nav-write-label{display:inline}}
     .nav-icon-btn{width:34px;height:34px;border-radius:6px;background:transparent;border:1px solid transparent;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all .2s}
     .nav-icon-btn:hover{background:var(--bg3);border-color:var(--border);color:var(--accent)}
     .hamburger{display:none;flex-direction:column;gap:4px;width:34px;height:34px;align-items:center;justify-content:center;border-radius:6px}
@@ -167,6 +173,10 @@
       <li><a href="../#iletisim">İletişim</a></li>
     </ul>
     <div class="nav-right">
+      <button class="nav-write-btn" onclick="window.location='../'" aria-label="Ana Sayfaya Dön">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="nav-write-label">Ana Sayfa</span>
+      </button>
       <button class="nav-icon-btn" onclick="toggleTheme()" aria-label="Tema değiştir"><span id="theme-icon">☀</span></button>
       <button class="hamburger nav-icon-btn" onclick="toggleMenu()" aria-label="Menü"><span></span><span></span><span></span></button>
     </div>
